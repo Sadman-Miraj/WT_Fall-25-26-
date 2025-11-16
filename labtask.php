@@ -108,26 +108,28 @@ function validateForm() {
     // -------- FINAL SUBMISSION --------
     if (!valid) return false;
 
-    // Show success message
-    const box = document.getElementById("success-message");
-    box.style.display = "block";
-    box.innerHTML = `
-        <strong>Registration Successful!</strong><br><br>
-        <b>Name:</b> ${name}<br>
-        <b>Email:</b> ${email}
-    `;
+            // Show success message
+            const box = document.getElementById("success-message");
+            box.style.display = "block";
+            box.innerHTML = `
+                <strong>Registration Successful!</strong><br><br>
+                <b>Name:</b> ${name}<br>
+                <b>Email:</b> ${email}
+            `;
 
-    return false; // Prevent page reload
-}
+            // Reset form
+            document.querySelector("form").reset();
 
+            return false; // Prevent page reload
+        }
 
-// Clear errors on typing
-function resetErrors() {
-    document.getElementById("name-error").textContent = "";
-    document.getElementById("email-error").textContent = "";
-    document.getElementById("password-error").textContent = "";
-    document.getElementById("cpass-error").textContent = "";
-}
+        // Clear errors on typing
+        function resetErrors() {
+            document.getElementById("name-error").textContent = "";
+            document.getElementById("email-error").textContent = "";
+            document.getElementById("password-error").textContent = "";
+            document.getElementById("cpass-error").textContent = "";
+        }
 </script>
     </div>
 </body>
