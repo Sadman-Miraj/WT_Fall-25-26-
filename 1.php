@@ -6,7 +6,9 @@
     <title>Tech Festival Registration</title>
  
 </head>
+<center>
 <body>
+
     <div class="container">
         <h2>Participant Registration</h2>
         <form onsubmit="return validateForm();">
@@ -226,4 +228,5 @@
         });
     </script>
 </body>
+</center>
 </html>
