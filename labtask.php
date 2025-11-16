@@ -62,7 +62,7 @@ function validateForm() {
     const pEr = document.getElementById("password-error");
     const cEr = document.getElementById("cpass-error");
 
-
+    // Clear previous errors
     nEr.textContent = "";
     eEr.textContent = "";
     pEr.textContent = "";
@@ -82,7 +82,7 @@ function validateForm() {
         valid = false;
     }
 
-    // -------- EMAIL  --------
+    // -------- EMAIL VALIDATION --------
     if (email === "") {
         eEr.textContent = "Email cannot be empty.";
         valid = false;
@@ -91,7 +91,7 @@ function validateForm() {
         valid = false;
     }
 
-    // -------- PASSWORD  --------
+    // -------- PASSWORD VALIDATION --------
     if (pass === "") {
         pEr.textContent = "Password cannot be empty.";
         valid = false;
@@ -105,12 +105,19 @@ function validateForm() {
         valid = false;
     }
 
-    // -------- FINAL  --------
+    // -------- FINAL SUBMISSION --------
     if (!valid) return false;
 
-   
+    // Show success message
+    const box = document.getElementById("success-message");
+    box.style.display = "block";
+    box.innerHTML = `
+        <strong>Registration Successful!</strong><br><br>
+        <b>Name:</b> ${name}<br>
+        <b>Email:</b> ${email}
+    `;
 
-    return false;
+    return false; // Prevent page reload
 }
 
 
