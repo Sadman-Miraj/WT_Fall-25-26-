@@ -1,17 +1,28 @@
-<!Doctype html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Automobiles Solution</title>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
 
-<html>  
-    <head>  
-        <title>Automobiles solution</title> 
-        <link rel="stylesheet" type="text/css" href="../css/index.css"> 
-    </head>  
-    <body >  
-        <section>
-            <div id="top">
-                <p id="logo"><a href="index.php" style="text-decoration: none;">AS</a></p>
+<div id="top">
+    <div class="top-left">
+        <a id="logo-link" href="index.php">AS</a>
+    </div>
 
-            </div>
-        </section>
-            
-    </body>
+    <div class="top-center">
+        Automobiles Solution
+    </div>
+
+    <div class="top-right">
+        <a href="login.php">Login</a>
+        <a href="signup.php">Sign Up</a>
+    </div>
+</div>
+<div id="center">
+    <h1 class="welcome">Welcome to Automobiles Solution</h1>
+    <p class="info">Your one-stop solution for all automobile needs.</p>
+</div>
+</body>
 </html>

@@ -1,17 +1,53 @@
-#top{
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#top {
     height: 60px;
     width: 100%;
     background-color: yellow;
-    margin: 0px;
+    display: flex;
+    align-items: center;
 }
-#logo{
-    font-family: brush script mt, cursive;
-    font-size: 20px;
+
+/* All sections take equal space */
+.top-left,
+.top-center,
+.top-right {
+    flex: 1;
+}
+
+/* Logo (Left) */
+.top-left {
+    padding-left: 20px;
+}
+
+#logo-link {
+    font-family: "Brush Script MT", cursive;
+    font-size: 22px;
     font-weight: bold;
-    padding: 20px;
-    margin: 0px;
+    text-decoration: none;
+    color: black;
 }
-body{
-    margin: 0px;
-    padding: 0px;
+
+/* Name (Center) */
+.top-center {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Login & Sign Up (Right) */
+.top-right {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.top-right a {
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
 }
