@@ -152,63 +152,49 @@ body {
 }
 footer {
     text-align: center;
-    padding: 15px 0;
+    padding: 30px 0;
     background-color: #1f2937;
     color: #ffffff;
-    position: relative;
-    bottom: 0;
     width: 100%;
     margin-top: 30px;
 }
-#finfo{
-    margin: 0;
-    font-size: 16px;
-    color: #d1d5db;
+
+#finfo {
     display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    padding: 0 40px;
 }
-.fp
-{
+
+.fp {
+    flex: 1;
+    text-align: left;
+}
+
+.fp h3 {
+    color: #3b82f6;
+    margin-bottom: 10px;
+}
+
+.fp p {
+    color: #d1d5db;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.fp a {
     color: #3b82f6;
     text-decoration: none;
-    flex: 1;
-    .abou
-    {
-        color: #3b82f6;
-        text-decoration: none;
-    }
-    .ap{
-        color: #3b82f6;
-        text-decoration: none;
-    }
-    .contact{
-        color: #3b82f6;
-        text-decoration: none;
-    };
-    .cp{
-        color: #3b82f6;
-        text-decoration: none;
-    }
-    .report
-    {
-        color: #3b82f6;
-        text-decoration: none;
-    }
-    .rp{
-        color: #3b82f6;
-        text-decoration: none;
-    }
-    #fb{
-        color: #3b82f6;
-        text-decoration: none;
-        background-size: contain;
-        width: 20px;
-        height: 20px;
-        margin-left: 10px;
-        background-position: center;
-    }
 }
-.fp:hover
-{
-    text-decoration: underline;
 
+.fp a:hover {
+    text-decoration: underline;
 }
+
+#fb {
+    width: 55px;
+    height: 55px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
