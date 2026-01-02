@@ -65,7 +65,7 @@ body {
 .info {
     text-align: center;
     margin-top: 20px;
-    padding: 0 20px;
+    padding: 0 100px;
     font-size: 18px;
     color: #f3f4f6;
 }
@@ -159,4 +159,56 @@ footer {
     bottom: 0;
     width: 100%;
     margin-top: 30px;
+}
+#finfo{
+    margin: 0;
+    font-size: 16px;
+    color: #d1d5db;
+    display: flex;
+}
+.fp
+{
+    color: #3b82f6;
+    text-decoration: none;
+    flex: 1;
+    .abou
+    {
+        color: #3b82f6;
+        text-decoration: none;
+    }
+    .ap{
+        color: #3b82f6;
+        text-decoration: none;
+    }
+    .contact{
+        color: #3b82f6;
+        text-decoration: none;
+    };
+    .cp{
+        color: #3b82f6;
+        text-decoration: none;
+    }
+    .report
+    {
+        color: #3b82f6;
+        text-decoration: none;
+    }
+    .rp{
+        color: #3b82f6;
+        text-decoration: none;
+    }
+    #fb{
+        color: #3b82f6;
+        text-decoration: none;
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+        background-position: center;
+    }
+}
+.fp:hover
+{
+    text-decoration: underline;
+
 }

@@ -79,7 +79,38 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
 <!----------------------------------INVENTORY---------------------------------->
 
 <footer>
+<div id="finfo">
 
+    <div class="fp">
+        <h3 class="abou">About us</h3>
+        <p class="ap">
+            Automobiles Solution is your trusted partner for all your vehicle maintenance 
+            and repair needs. With a team of experienced mechanics and a commitment to 
+            customer satisfaction, we provide top-notch services to keep your car in 
+            optimal condition.
+
+        </p>
+    </div>
+    <div class="fp">
+        <h3 class="contact">Contact Us</h3>
+        <p class="cp">
+            Phone: +123-456-7890<br>
+            Email: info@automobilessolution.com<br>
+            Address: 123 Auto Street, Car City, Country
+
+        </p>
+    </div>
+    <div class="fp">
+        <h3 class="report">Report</h3>
+        <p class="rp">
+            For any issues or feedback regarding our services, please reach out to us 
+            at 
+            <a href="facebook.com"><img id="fb" src="../image/index/Fb.png" alt="Fb"></a>
+
+        </p>
+    </div>
+
+</div>
 </footer>
 </body>
 </html>
