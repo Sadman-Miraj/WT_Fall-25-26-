@@ -172,7 +172,7 @@ footer {
 }
 
 .fp h3 {
-    color: #3b82f6;
+    color:indianred
     margin-bottom: 10px;
 }
 
@@ -208,4 +208,26 @@ footer {
     height: 55px;
     margin-left: 10px;
     vertical-align: middle;
+}
+.invh
+{
+    margin-top: 20px;
+    font-size: 14px;
+    color: #9ca3af;
+    text-align: center;
+    display: flex;
+}
+#inv{
+    flex: 1;
+    color: #9ca3af;
+    .light{
+        font-weight: lighter;
+    }
+    img{
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        background-size: cover;
+    }
 }

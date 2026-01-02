@@ -78,6 +78,28 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
 </h1>
 <!----------------------------------INVENTORY---------------------------------->
 
+<h2 class="invh">Our Inventory</h2>
+<div id="inv">
+    <div class="light">
+        <img src="../image/index/light.jpeg" alt="Sedan">
+        <h3 class="invt">LIGHT</h3>
+</div>
+    <div class="light">
+        <img src="../image/index/battery.jpeg" alt="SUV">
+        <h3 class="invt">BATTERY</h3>
+    </div>
+    <div class="light">
+        <img src="../image/index/shock.jpg" alt="Truck">
+        <h3 class="invt">SHOCK ABSORBER</h3>
+    </div>
+    <div class="light">
+        <img src="../image/index/wheel.jpeg" alt="Coupe">
+        <h3 class="invt">WHEEL</h3>
+    </div>
+</div>
+        
+
+<!----------------------------------footer---------------------------------->
 <footer>
 <div id="finfo">
 
@@ -104,7 +126,7 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
         <h3 class="report">Report</h3>
         <p class="rp">
             For any issues or feedback regarding our services, please reach out to us 
-            at 
+            at:
         </p>
         <div id="social">
             <a href="facebook.com"><img id="fb" src="../image/index/Fb.png" alt="Fb"></a>
