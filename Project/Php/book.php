@@ -41,7 +41,7 @@
 
         <label for="coupon">Coupon Code:</label>
         <input type="text" id="coupon" name="coupon"><br><br>
-        <button id="coupon Now">Apply</button>
+        <button id="coupon">Apply</button>
 
         <input type="submit" value="Book Now">
         </legend>
@@ -70,7 +70,7 @@
 
         <label for="coupon">Coupon Code:</label>
         <input type="text" id="coupon" name="coupon"><br><br>
-        <button id="coupon Now">Apply</button>
+        <button id="coupon">Apply</button>
 
         <input type="submit" value="Book Now">
         </legend>
@@ -98,12 +98,14 @@
 
         <label for="coupon">Coupon Code:</label>
         <input type="text" id="coupon" name="coupon"><br><br>
-        <button id="coupon Now">Apply</button>
+        <button id="coupon">Apply</button>
 
         <input type="submit" value="Book Now">
         </legend>
     </form>
 <footer>
 </footer>
+<script src="../js/book.js"></script>
+
 </body>
 </html>
