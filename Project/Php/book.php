@@ -40,7 +40,7 @@
         </select>
 
         <label for="coupon">Coupon Code:</label>
-        <input type="text" id="coupon" name="coupon"><br><br>
+        <input type="text" id="coupon" name="coupon">
         <button id="coupon">Apply</button>
 
         <input type="submit" value="Book Now">
@@ -69,7 +69,7 @@
         </select>
 
         <label for="coupon">Coupon Code:</label>
-        <input type="text" id="coupon" name="coupon"><br><br>
+        <input type="text" id="coupon" name="coupon">
         <button id="coupon">Apply</button>
 
         <input type="submit" value="Book Now">
@@ -94,10 +94,10 @@
             <option value="towing">Towing</option>
             <option value="battery">Battery Jumpstart</option>
             <option value="flat">Flat Tire Change</option>
-        </select>
+        </select><br><br>
 
         <label for="coupon">Coupon Code:</label>
-        <input type="text" id="coupon" name="coupon"><br><br>
+        <input type="text" id="coupon" name="coupon">
         <button id="coupon">Apply</button>
 
         <input type="submit" value="Book Now">

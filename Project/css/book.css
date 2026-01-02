@@ -1,60 +1,124 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f9fafb;
 }
-.servh{
+
+/* Heading */
+.servh {
     text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    margin-top: 40px;
+    font-size: 26px;
+    margin-top: 30px;
     color: #1f2937;
 }
-#ser
-{
+
+/* Service buttons area */
+#ser {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    gap: 30px;
     margin-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
-#regular{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333333;
 
+.service-item {
+    text-align: center;
 }
-#regular:hover
-{
+
+/* Service buttons */
+#regular,
+#home,
+#emergency {
+    padding: 12px 25px;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
+    background-color: #ffffff;
     color: #1f2937;
-    background-color: #e5e7eb;
     cursor: pointer;
 }
-#home
-{
-   font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333333;
 
-}
-#home:hover
-{
-    color: #1f2937;
+#regular:hover,
+#home:hover,
+#emergency:hover {
     background-color: #e5e7eb;
+}
+
+/* Forms */
+#reg,
+#homeService,
+#emerg {
+    display: none;
+    width: 500px;
+    margin: 0 auto 30px auto;
+    border: 1px solid #d1d5db;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+/* Legend */
+#reg legend,
+#homeService legend,
+#emerg legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #1f2937;
+}
+
+/* Labels */
+#reg label,
+#homeService label,
+#emerg label {
+    display: block;
+    margin-top: 12px;
+    color: #374151;
+}
+
+/* Inputs and select */
+#reg input,
+#reg select,
+#homeService input,
+#homeService select,
+#emerg input,
+#emerg select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #d1d5db;
+}
+
+/* Apply buttons */
+#reg button,
+#homeService button,
+#emerg button {
+    margin-top: 12px;
+    padding: 6px 14px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
     cursor: pointer;
 }
-#emergency
-{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333333;
 
+#reg button:hover,
+#homeService button:hover,
+#emerg button:hover {
+    background-color: #ecb3a7;
 }
-#emergency:hover
-{
-    color: #1f2937;
-    background-color: #e5e7eb;
+
+/* Submit buttons */
+#reg input[type="submit"],
+#homeService input[type="submit"],
+#emerg input[type="submit"] {
+    margin-top: 12px;
+    padding: 8px;
+    background-color: #2563eb;
+    color: #ffffff;
+    border: none;
     cursor: pointer;
+}
+
+#reg input[type="submit"]:hover,
+#homeService input[type="submit"]:hover,
+#emerg input[type="submit"]:hover {
+    background-color: #1d4ed8;
 }
