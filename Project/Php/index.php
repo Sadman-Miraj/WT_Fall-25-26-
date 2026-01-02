@@ -20,6 +20,7 @@
         <a href="signup.php">Sign Up</a>
     </div>
 </div>
+<!---------------------------------center----------------------------------->
 <div id="center">
     <h1 class="welcome">Welcome to Automobiles Solution</h1>
     <p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
@@ -44,21 +45,38 @@
          asperiores odit voluptatum repudiandae laboriosam sunt totam eaque doloremque? 
          Alias reprehenderit tempore suscipit eum sunt eos corporis omnis.</p>
 </div>
-<div id="services">
-    <h2 class="services-heading">Our Services</h2>
+
+<!----------------------------------services---------------------------------->
+<h2 class="servh">Our Services</h2>
+<div id="ser">
     <div class="service-item">
-        <h3>Service 1</h3>
-        <p>Description of Service 1.</p>
+        <h3 class="sert">Regular</h3>
+        <p class="serp">
+Routine vehicle maintenance and checkups to keep your car running smoothly. 
+Ideal for scheduled servicing, inspections, and minor repairs.
+        </p>
     </div>
     <div class="service-item">
-        <h3>Service 2</h3>
-        <p>Description of Service 2.</p>
+        <h3 class="sert">Emergency</h3>
+        <p class="serp">
+24/7 roadside assistance for breakdowns, accidents, or urgent repairs.
+Fast response times to get you back on the road quickly and safely.
+        </p>
     </div>
     <div class="service-item">
-        <h3>Service 3</h3>
-        <p>Description of Service 3.</p>
+        <h3 class="sert">Home</h3>
+        <p class="serp">
+Convenient vehicle servicing at your home or workplace.
+Professional mechanics come to you for oil changes, tire rotations, and more.
+
+        </p>
     </div>
 </div>
+<h1 id="book">
+    <a href="book.php" style="color: white; text-decoration: none;">Book Now</a>
+</h1>
+<!----------------------------------INVENTORY---------------------------------->
+
 <footer>
 
 </footer>
