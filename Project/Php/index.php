@@ -97,6 +97,9 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
         <h3 class="invt">WHEEL</h3>
     </div>
 </div>
+<h1 id="buy">
+    <a href="buy.php" style="color: white; text-decoration: none;">BUY Now</a>
+</h1>
         
 
 <!----------------------------------footer---------------------------------->

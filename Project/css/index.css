@@ -209,25 +209,61 @@ footer {
     margin-left: 10px;
     vertical-align: middle;
 }
-.invh
-{
-    margin-top: 20px;
-    font-size: 14px;
-    color: #9ca3af;
+.invh {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #1f2937;
     text-align: center;
-    display: flex;
+    font-weight: bold;
+    text-decoration: underline;
 }
-#inv{
+
+#inv {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin: 30px;
+}
+
+.light {
     flex: 1;
-    color: #9ca3af;
-    .light{
-        font-weight: lighter;
-    }
-    img{
-        vertical-align: middle;
-        width: 20px;
-        height: 20px;
-        margin-right: 10px;
-        background-size: cover;
-    }
+    text-align: center;
+    background-color:#c3cee7;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.light:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.light img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.invt {
+    font-size: 10px;
+    font-weight: bold;
+    color: #374151;
+    margin: 0;
+}
+#buy a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 12px 25px;
+    background-color: #2563eb;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+#buy a:hover {
+    background-color: #1e40af;
 }
