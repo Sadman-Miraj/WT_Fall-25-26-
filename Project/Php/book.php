@@ -9,27 +9,43 @@
 <h2 class="servh">Our Services</h2>
 <div id="ser">
     <div class="service-item">
-        <h3 class="sert">Regular</h3>
-        <p class="serp">
-Routine vehicle maintenance and checkups to keep your car running smoothly. 
-Ideal for scheduled servicing, inspections, and minor repairs.
-        </p>
-    </div>
-    <div class="service-item">
-        <h3 class="sert">Emergency</h3>
-        <p class="serp">
-24/7 roadside assistance for breakdowns, accidents, or urgent repairs.
-Fast response times to get you back on the road quickly and safely.
-        </p>
-    </div>
-    <div class="service-item">
-        <h3 class="sert">Home</h3>
-        <p class="serp">
-Convenient vehicle servicing at your home or workplace.
-Professional mechanics come to you for oil changes, tire rotations, and more.
+ <button id="regular">Regular</button>
 
-        </p>
+
     </div>
+    <div class="service-item">
+  <button id="home">Home</button>
+
+    </div>
+    <div class="service-item">
+    <button id="emergency">Emergency</button>
+    </div>
+</div>
+
+<!----------------------------------template for regular---------------------------------->
+<div id="reg">
+    <form action="index.php" method="post">
+        <legend>Regular Service Booking
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        <label for="date">Preferred Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+        
+        
+        <label for="type">Service Type:</label>
+        <select id="type" name="type">
+            <option value="oil">Oil Change</option>
+            <option value="tire">Tire Rotation</option>
+            <option value="brake">Brake Inspection</option>
+        </select>
+
+        <label for="coupon">Coupon Code:</label>
+        <input type="text" id="coupon" name="coupon"><br><br>
+        <button id="coupon Now">Apply</button>
+
+        <input type="submit" value="Book Now">
+        </legend>
+    </form>
 </div>
 <footer>
 </footer>

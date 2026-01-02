@@ -16,8 +16,11 @@
     </div>
 
     <div class="top-right">
-        <a href="login.php">Login</a>
+        <p>
+            <a href="login.php">Login</a>
         <a href="signup.php">Sign Up</a>
+        </p>
+        
     </div>
 </div>
 <!---------------------------------center----------------------------------->
