@@ -1,1 +1,17 @@
-git a
+#top{
+    height: 60px;
+    width: 100%;
+    background-color: yellow;
+    margin: 0px;
+}
+#logo{
+    font-family: brush script mt, cursive;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 20px;
+    margin: 0px;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}

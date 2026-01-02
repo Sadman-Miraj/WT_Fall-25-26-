@@ -2,10 +2,16 @@
 
 <html>  
     <head>  
-        <title>PHP Test</title>  
+        <title>Automobiles solution</title> 
+        <link rel="stylesheet" type="text/css" href="../css/index.css"> 
     </head>  
-    <body>  
-        <h1><?php echo "Hello, World!"; ?></h1>  
+    <body >  
+        <section>
+            <div id="top">
+                <p id="logo"><a href="index.php" style="text-decoration: none;">AS</a></p>
+
+            </div>
+        </section>
+            
     </body>
 </html>
->
