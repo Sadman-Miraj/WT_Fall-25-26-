@@ -1,17 +1,104 @@
-        .message {
-            padding: 10px;
-            margin: 10px auto;
-            border-radius: 4px;
-            text-align: center;
-            max-width: 500px;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #EBF4DD;
+    color: #3B4953;
+}
+
+.servh {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 30px;
+    color: #3B4953;
+}
+
+.service-form {
+    width: 500px;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background-color: #90AB8B;
+    border: 1px solid #5A7863;
+    border-radius: 8px;
+}
+
+.service-form fieldset {
+    border: 1px solid #5A7863;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.service-form legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3B4953;
+    padding: 0 10px;
+}
+
+.service-form label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    color: #3B4953;
+    font-weight: bold;
+}
+
+.service-form input[type="text"],
+.service-form input[type="date"],
+.service-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #5A7863;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.service-form select option[value=""][disabled] {
+    color: #888;
+    font-style: italic;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #3B4953;
+    color: #EBF4DD;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background-color: #5A7863;
+}
+
+.service-form label[for]:after {
+    content: " *";
+    color: #d32f2f;
+}
+
+.message {
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 4px;
+    text-align: center;
+    max-width: 500px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
