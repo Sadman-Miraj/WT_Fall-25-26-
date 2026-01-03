@@ -1,5 +1,6 @@
 <?php
-// PHP at the TOP
+include "../db/db.php";
+
 $name = $location = $issue = $type = "";
 $message = "";
 $messageType = "";
@@ -10,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $issue = trim($_POST["issue"] ?? "");
     $type = $_POST["type"] ?? "";
     
-    // Validate inputs
     if (empty($name)) {
         $message = "Name is required.";
         $messageType = "error";
@@ -24,11 +24,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Please select a valid service type.";
         $messageType = "error";
     } else {
-        $message = "Emergency service request received for $name for $issue and service type $type ! Our team will contact at your location $location.";
-        $messageType = "success";
+        $sql = "INSERT INTO emergency (name, location, issue, type) VALUES ('$name', '$location', '$issue', '$type')";
+        
+        if($conn->query($sql)) {
+            $message = "Emergency service request received! Our team will contact you shortly for your $type service.";
+            $messageType = "success";
+            $name = $location = $issue = $type = "";
+        } else {
+            $message = "Database error: " . $conn->error;
+            $messageType = "error";
+        }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,16 +58,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" action="">
             <fieldset>
                 <legend>Emergency Service Booking</legend>
+                
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" 
-                       value="<?php echo htmlspecialchars($name); ?>" required><br><br>
+                       value="<?php echo htmlspecialchars($name); ?>" required>
                 
                 <label for="location">Current Location:</label>
                 <input type="text" id="location" name="location" 
-                       value="<?php echo htmlspecialchars($location); ?>" required><br><br>
+                       value="<?php echo htmlspecialchars($location); ?>" required>
                 
                 <label for="issue">Describe the Issue:</label>
-                <textarea id="issue" name="issue" rows="3" required><?php echo htmlspecialchars($issue); ?></textarea><br><br>
+                <textarea id="issue" name="issue" required><?php echo htmlspecialchars($issue); ?></textarea>
                 
                 <label for="type">Service Type:</label>
                 <select id="type" name="type" required>
@@ -66,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <option value="towing" <?php echo ($type == 'towing') ? 'selected' : ''; ?>>Towing Service</option>
                     <option value="battery" <?php echo ($type == 'battery') ? 'selected' : ''; ?>>Battery Jumpstart</option>
                     <option value="flat" <?php echo ($type == 'flat') ? 'selected' : ''; ?>>Flat Tire Change</option>
-                </select><br><br>
+                </select>
                 
                 <input type="submit" value="Request Emergency Service" class="submit-btn emergency-btn">
             </fieldset>
@@ -74,3 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </body>
 </html>
+<?php
+$conn->close();
+?>

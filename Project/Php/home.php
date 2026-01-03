@@ -1,5 +1,6 @@
 <?php
-// PHP at the TOP
+include "../db/db.php";
+
 $name = $address = $date = $type = "";
 $message = "";
 $messageType = "";
@@ -10,7 +11,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST["date"] ?? "";
     $type = $_POST["type"] ?? "";
     
-    // Validate inputs
     if (empty($name)) {
         $message = "Name is required.";
         $messageType = "error";
@@ -27,19 +27,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Please select a valid service type.";
         $messageType = "error";
     } else {
-        $message = "Thank you, $name! Your $type service is booked for $date at your address.";
-        $messageType = "success";
+        $sql = "INSERT INTO home (name, address, date, type) VALUES ('$name', '$address', '$date', '$type')";
+        
+        if($conn->query($sql)) {
+            $message = "Thank you, $name! Your $type service is booked for $date at your address.";
+            $messageType = "success";
+            $name = $address = $date = $type = "";
+        } else {
+            $message = "Database error: " . $conn->error;
+            $messageType = "error";
+        }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Automobiles Solution - Home Service</title>
     <link rel="stylesheet" href="../css/home.css">
-    <style>
-
-    </style>
 </head>
 <body>
     <h2 class="servh">Home Service Details</h2>
@@ -54,26 +60,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" action="">
             <fieldset>
                 <legend>Home Service Booking</legend>
+                
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" 
-                       value="<?php echo htmlspecialchars($name); ?>" required><br><br>
+                       value="<?php echo htmlspecialchars($name); ?>" required>
                 
                 <label for="address">Service Address:</label>
                 <input type="text" id="address" name="address" 
-                       value="<?php echo htmlspecialchars($address); ?>" required><br><br>
+                       value="<?php echo htmlspecialchars($address); ?>" required>
                 
                 <label for="date">Preferred Date:</label>
                 <input type="date" id="date" name="date" 
                        value="<?php echo $date; ?>" 
-                       min="<?php echo date('Y-m-d'); ?>" required><br><br>
+                       min="<?php echo date('Y-m-d'); ?>" required>
                 
                 <label for="type">Service Type:</label>
                 <select id="type" name="type" required>
-                    <option value="" disabled <?php echo ($type == '') ? 'selected' : ''; ?>>Select one</option>
+                    <option value="" disabled <?php echo ($type == '') ? 'selected' : ''; ?>>Select service type</option>
                     <option value="oil" <?php echo ($type == 'oil') ? 'selected' : ''; ?>>Oil Change</option>
                     <option value="tire" <?php echo ($type == 'tire') ? 'selected' : ''; ?>>Tire Rotation</option>
                     <option value="brake" <?php echo ($type == 'brake') ? 'selected' : ''; ?>>Brake Inspection</option>
-                </select><br><br>
+                </select>
                 
                 <input type="submit" value="Book Now" class="submit-btn">
             </fieldset>
@@ -85,3 +92,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </script>
 </body>
 </html>
+<?php
+$conn->close();
+?>

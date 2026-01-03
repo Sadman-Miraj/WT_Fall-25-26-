@@ -1,15 +1,15 @@
 <?php
-// PHP must be at the TOP to process form data before displaying HTML
+include "../db/db.php";
+
 $name = $date = $type = "";
 $message = "";
-$messageType = ""; 
+$messageType = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST["name"] ?? "");
     $date = $_POST["date"] ?? "";
     $type = $_POST["type"] ?? "";
     
-    // Validate inputs
     if (empty($name)) {
         $message = "Name is required.";
         $messageType = "error";
@@ -23,15 +23,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Please select a valid service type.";
         $messageType = "error";
     } else {
-        $message = "Thank you, $name! Your $type service is booked for $date.";
-        $messageType = "success";
+        $sql = "INSERT INTO regular (name, date, type) VALUES ('$name', '$date', '$type')";
+        
+        if($conn->query($sql)) {
+            $message = "Thank you, $name! Your $type service is booked for $date.";
+            $messageType = "success";
+            $name = $date = $type = "";
+        } else {
+            $message = "Database error: " . $conn->error;
+            $messageType = "error";
+        }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Automobiles Solution</title>
+    <title>Automobiles Solution - Regular Service</title>
     <link rel="stylesheet" href="../css/regular.css">
 </head>
 <body>
@@ -44,26 +53,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <?php endif; ?>
     
     <div class="service-form">
-        <!-- Remove action="index.php" or use action="" -->
         <form method="post" action="">
             <fieldset>
                 <legend>Regular Service Booking</legend>
+                
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" 
-                       value="<?php echo htmlspecialchars($name); ?>" required><br><br>
+                       value="<?php echo htmlspecialchars($name); ?>" required>
                 
                 <label for="date">Preferred Date:</label>
                 <input type="date" id="date" name="date" 
                        value="<?php echo $date; ?>" 
-                       min="<?php echo date('Y-m-d'); ?>" required><br><br>
+                       min="<?php echo date('Y-m-d'); ?>" required>
                 
                 <label for="type">Service Type:</label>
                 <select id="type" name="type" required>
-                    <option value="" disabled <?php echo ($type == '') ? 'selected' : ''; ?>>Select one</option>
+                    <option value="" disabled <?php echo ($type == '') ? 'selected' : ''; ?>>Select service type</option>
                     <option value="oil" <?php echo ($type == 'oil') ? 'selected' : ''; ?>>Oil Change</option>
                     <option value="tire" <?php echo ($type == 'tire') ? 'selected' : ''; ?>>Tire Rotation</option>
                     <option value="brake" <?php echo ($type == 'brake') ? 'selected' : ''; ?>>Brake Inspection</option>
-                </select><br><br>
+                </select>
                 
                 <input type="submit" value="Book Now" class="submit-btn">
             </fieldset>
@@ -71,8 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
     
     <script>
-        // Set minimum date to today
         document.getElementById('date').min = new Date().toISOString().split('T')[0];
     </script>
 </body>
 </html>
+<?php
+$conn->close();
+?>
