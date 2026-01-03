@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Please select a valid service type.";
         $messageType = "error";
     } else {
-        $message = "Emergency service request received! Our team will contact you shortly for your $type service.";
+        $message = "Emergency service request received for $name for $issue and service type $type ! Our team will contact at your location $location.";
         $messageType = "success";
     }
 }
