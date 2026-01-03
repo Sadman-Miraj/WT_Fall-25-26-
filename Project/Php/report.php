@@ -1,3 +1,38 @@
+```php
+<?php
+$name = $service_date = $service_type = $feedback = "";
+$message = "";
+$messageType = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = trim($_POST["name"] ?? "");
+    $service_date = $_POST["service_date"] ?? "";
+    $service_type = $_POST["service_type"] ?? "";
+    $feedback = trim($_POST["feedback"] ?? "");
+    
+    if (empty($name)) {
+        $message = "Name is required.";
+        $messageType = "error";
+    } elseif (empty($service_date)) {
+        $message = "Service date is required.";
+        $messageType = "error";
+    } elseif (strtotime($service_date) > strtotime(date('Y-m-d'))) {
+        $message = "Service date cannot be in the future.";
+        $messageType = "error";
+    } elseif (empty($service_type) || !in_array($service_type, ['regular', 'home', 'emergency'])) {
+        $message = "Please select a valid service type.";
+        $messageType = "error";
+    } elseif (empty($feedback)) {
+        $message = "Feedback is required.";
+        $messageType = "error";
+    } else {
+        $message = "Report submitted successfully!";
+        $messageType = "success";
+        $name = $service_date = $service_type = $feedback = "";
+    }
+}
+?>
+```
 <!DOCTYPE html>
 <html>
 <head>
