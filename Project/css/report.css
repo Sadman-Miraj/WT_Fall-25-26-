@@ -2,28 +2,28 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #F9EBEB;
-    color: #5A3333;
+    background-color: #0A0A0A;
+    color: #FFFFFF;
 }
 
 .servh {
     text-align: center;
     font-size: 26px;
     margin-top: 30px;
-    color: #8B0000;
+    color: #FF0000;
 }
 
 .report-form {
     width: 500px;
     margin: 0 auto 30px auto;
     padding: 20px;
-    background-color: #E8B7B7;
-    border: 1px solid #B85C5C;
+    background-color: #1A1A1A;
+    border: 2px solid #FF0000;
     border-radius: 8px;
 }
 
 .report-form fieldset {
-    border: 1px solid #B85C5C;
+    border: 2px solid #FF0000;
     padding: 20px;
     border-radius: 5px;
 }
@@ -31,14 +31,14 @@ body {
 .report-form legend {
     font-size: 18px;
     font-weight: bold;
-    color: #8B0000;
+    color: #FF0000;
     padding: 0 10px;
 }
 
 .report-form label {
     display: block;
     margin-top: 12px;
-    color: #5A3333;
+    color: #CCCCCC;
     font-weight: bold;
 }
 
@@ -49,10 +49,11 @@ body {
     width: 100%;
     padding: 8px;
     margin-top: 6px;
-    border: 1px solid #B85C5C;
+    border: 1px solid #FF0000;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #FFF5F5;
+    background-color: #2A2A2A;
+    color: #FFFFFF;
 }
 
 .report-form textarea {
@@ -65,8 +66,8 @@ body {
     width: 100%;
     margin-top: 20px;
     padding: 12px;
-    background-color: #8B0000;
-    color: #FFF5F5;
+    background-color: #FF0000;
+    color: #FFFFFF;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -75,7 +76,7 @@ body {
 }
 
 .submit-btn:hover {
-    background-color: #A52A2A;
+    background-color: #CC0000;
 }
 
 .message {
@@ -87,13 +88,14 @@ body {
 }
 
 .success {
-    background-color: #FFE6E6;
-    color: #8B0000;
-    border: 1px solid #FFB3B3;
+    background-color: #1A1A1A;
+    color: #00FF00;
+    border: 1px solid #00FF00;
 }
 
 .error {
-    background-color: #FFE6E6;
-    color: #8B0000;
-    border: 1px solid #FF9999;
+    background-color: #1A1A1A;
+    color: #FF0000;
+    border: 1px solid #FF0000;
 }
+
