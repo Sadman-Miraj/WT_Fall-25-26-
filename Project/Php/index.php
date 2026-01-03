@@ -133,6 +133,7 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
         <p class="rp">
             For any issues or feedback regarding our services, please reach out to us 
             at:
+            <a href="report.php">Report</a>
         </p>
         <div id="social">
             <a href="facebook.com"><img id="fb" src="../image/index/Fb.png" alt="Fb"></a>
