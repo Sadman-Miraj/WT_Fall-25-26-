@@ -1,5 +1,6 @@
-```php
 <?php
+include "../db/db.php";
+
 $name = $service_date = $service_type = $feedback = "";
 $message = "";
 $messageType = "";
@@ -26,13 +27,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "Feedback is required.";
         $messageType = "error";
     } else {
-        $message = "Report submitted successfully!";
-        $messageType = "success";
-        $name = $service_date = $service_type = $feedback = "";
+        $sql = "INSERT INTO report (name, date, type, feedback) VALUES ('$name', '$service_date', '$service_type', '$feedback')";
+        
+        if($conn->query($sql)) {
+            $message = "Report submitted successfully!";
+            $messageType = "success";
+            $name = $service_date = $service_type = $feedback = "";
+        } else {
+            $message = "Database error: " . $conn->error;
+            $messageType = "error";
+        }
     }
 }
 ?>
-```
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,29 +49,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <h2 class="servh">Service Report</h2>
+    
+    <?php if (!empty($message)): ?>
+        <div class="message <?php echo $messageType; ?>">
+            <?php echo htmlspecialchars($message); ?>
+        </div>
+    <?php endif; ?>
+    
     <div class="report-form" id="report">
-        <form method="post" action="process_report.php">
+        <form method="post" action="">
             <fieldset>
                 <legend>Service Report Submission</legend>
                 
                 <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required><br><br>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($name); ?>" required>
                 
                 <label for="service_date">Service Date:</label>
-                <input type="date" id="service_date" name="service_date" required><br><br>
+                <input type="date" id="service_date" name="service_date" value="<?php echo $service_date; ?>" max="<?php echo date('Y-m-d'); ?>" required>
                 
                 <label for="service_type">Service Type:</label>
                 <select id="service_type" name="service_type" required>
-                    <option value="">Select a service</option>
-                    <option value="regular">Regular</option>
-                    <option value="home">Home</option>
-                    <option value="emergency">Emergency</option>
-                </select><br><br>
+                    <option value="" disabled <?php echo ($service_type == '') ? 'selected' : ''; ?>>Select a service</option>
+                    <option value="regular" <?php echo ($service_type == 'regular') ? 'selected' : ''; ?>>Regular</option>
+                    <option value="home" <?php echo ($service_type == 'home') ? 'selected' : ''; ?>>Home</option>
+                    <option value="emergency" <?php echo ($service_type == 'emergency') ? 'selected' : ''; ?>>Emergency</option>
+                </select>
                 
-                <label for="feedback">Feedback:</label><br>
-                <textarea id="feedback" name="feedback" rows="4" cols="50" required></textarea><br><br>
+                <label for="feedback">Feedback:</label>
+                <textarea id="feedback" name="feedback" rows="4" required><?php echo htmlspecialchars($feedback); ?></textarea>
                 
                 <input type="submit" value="Submit Report" class="submit-btn">
             </fieldset>
         </form>
     </div>
+    
+    <script>
+        document.getElementById('service_date').max = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
+<?php
+$conn->close();
+?>

@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #EBF4DD;
+    color: #3B4953;
+}
+
+.servh {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 30px;
+    color: #3B4953;
+}
+
+.report-form {
+    width: 500px;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background-color: #90AB8B;
+    border: 1px solid #5A7863;
+    border-radius: 8px;
+}
+
+.report-form fieldset {
+    border: 1px solid #5A7863;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.report-form legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3B4953;
+    padding: 0 10px;
+}
+
+.report-form label {
+    display: block;
+    margin-top: 12px;
+    color: #3B4953;
+    font-weight: bold;
+}
+
+.report-form input[type="text"],
+.report-form input[type="date"],
+.report-form select,
+.report-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #5A7863;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.report-form textarea {
+    font-family: Arial, Helvetica, sans-serif;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #3B4953;
+    color: #EBF4DD;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.submit-btn:hover {
+    background-color: #5A7863;
+}
+
+.message {
+    padding: 10px;
+    margin: 10px auto;
+    border-radius: 4px;
+    text-align: center;
+    max-width: 500px;
+}
+
+.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
