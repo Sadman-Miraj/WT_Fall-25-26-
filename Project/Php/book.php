@@ -9,16 +9,16 @@
 <h2 class="servh">Our Services</h2>
 <div id="ser">
     <div class="service-item">
- <button id="regular">Regular</button>
+ <button id="regular"><a href="regular.php">Regular</a></button>
 
 
     </div>
     <div class="service-item">
-  <button  id="home">Home</button>
+  <button  id="home"><a href="home.php">Home</a></button>
 
     </div>
     <div class="service-item">
-    <button id="emergency">Emergency</button>
+    <button id="emergency"><a href="emergency.php">Emergency</a></button>
     </div>
 </div>
 
