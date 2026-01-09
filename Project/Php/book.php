@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../css/book.css">
 </head>
 <body>
-    <!----------------------------------services---------------------------------->
+    <!----------------------------------services--------------------------------->
 <h2 class="servh">Our Services</h2>
 <div id="ser">
     <div class="service-item">
