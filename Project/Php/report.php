@@ -4,7 +4,7 @@ include "../db/db.php";
 $name = $service_date = $service_type = $feedback = "";
 $message = "";
 $messageType = "";
-//
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = trim($_POST["name"] ?? "");
     $service_date = $_POST["service_date"] ?? "";
