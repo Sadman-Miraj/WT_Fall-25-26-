@@ -627,3 +627,46 @@ if ($result->num_rows > 0) {
         console.log('Products:', window.products);
         console.log('Cart:', window.cart);
     </script>
+        <!-- Debug script to test if buttons work -->
+    <script>
+        // Simple test script
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded - Testing buttons');
+            
+            // Test if cart icon exists and is clickable
+            const cartIcon = document.getElementById('cartIcon');
+            if (cartIcon) {
+                console.log('Cart icon found:', cartIcon);
+                cartIcon.addEventListener('click', function() {
+                    console.log('Cart icon clicked!');
+                    const cartSidebar = document.getElementById('cartSidebar');
+                    if (cartSidebar) {
+                        cartSidebar.style.right = '0';
+                        console.log('Cart opened');
+                    }
+                });
+            } else {
+                console.error('Cart icon NOT found!');
+            }
+            
+            // Test if "Add to Cart" buttons exist
+            const addButtons = document.querySelectorAll('.add-to-cart-btn');
+            console.log('Found', addButtons.length, 'Add to Cart buttons');
+            
+            // Simple test function
+            window.testAddToCart = function(itemId) {
+                console.log('Test addToCart called for item:', itemId);
+                const qtyInput = document.getElementById('qty-' + itemId);
+                if (qtyInput) {
+                    console.log('Quantity input found:', qtyInput.value);
+                }
+                return 'Test function working';
+            };
+        });
+    </script>
+    
+    <!-- Link to external JavaScript file -->
+    <script src="../js/customer_inventory.js"></script>
+</body>
+</html>
+<?php $conn->close(); ?>
