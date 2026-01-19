@@ -28,3 +28,26 @@ async function loadProfileData() {
         showMessage('Error loading profile data', 'error');
     }
 }
+editForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = {
+        name: document.getElementById('editName').value.trim(),
+        age: parseInt(document.getElementById('editAge').value),
+        address: document.getElementById('editAddress').value.trim()
+    };
+    
+    if (!formData.name) {
+        showMessage('Name is required', 'error');
+        return;
+    }
+    
+    if (formData.age < 18 || formData.age > 100 || isNaN(formData.age)) {
+        showMessage('Age must be between 18 and 100', 'error');
+        return;
+    }
+    
+    if (!formData.address) {
+        showMessage('Address is required', 'error');
+        return;
+    }
