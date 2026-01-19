@@ -550,3 +550,57 @@ if ($result->num_rows > 0) {
             <?php endif; ?>
         </div>
     </div>
+        <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+            <button class="close-cart" id="closeCart">&times;</button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">৳0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Tier Discount (<?php echo $discount_percentage; ?>%):</span>
+                <span id="tierDiscount">-৳0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Points Discount:</span>
+                <span id="pointsDiscount">-৳0.00</span>
+            </div>
+            <div class="summary-row total">
+                <span>Total:</span>
+                <span id="cartTotal">৳0.00</span>
+            </div>
+            
+            <!-- Points Redemption -->
+            <div class="points-redemption">
+                <label for="usePoints">
+                    <input type="checkbox" id="usePoints"> Use Points for Discount
+                </label>
+                <div class="points-input-group" id="pointsInputGroup" style="display: none;">
+                    <input type="number" 
+                           id="pointsToUse" 
+                           min="1" 
+                           max="<?php echo $customer['points'] ?? 0; ?>" 
+                           placeholder="Points to use">
+                    <button class="apply-points-btn" onclick="applyPoints()">Apply</button>
+                    <small>1 point = 10 BDT discount</small>
+                </div>
+            </div>
+            
+            <button class="checkout-btn" id="checkoutBtn" onclick="processCheckout()">
+                <i class="fas fa-lock"></i> Proceed to Checkout
+            </button>
+        </div>
+    </div>
