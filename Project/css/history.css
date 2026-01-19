@@ -223,3 +223,59 @@ h1 {
     background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
     color: white;
 }
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.service-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #333;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #ff8c00;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.service-card:hover {
+    border-color: #ff8c00;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 140, 0, 0.1);
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.service-header h3 {
+    color: #ff8c00;
+    font-size: 18px;
+    font-weight: 600;
+    flex: 1;
+    min-width: 200px;
+}
