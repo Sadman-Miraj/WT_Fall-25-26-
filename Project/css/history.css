@@ -198,3 +198,28 @@ h1 {
     color: #ffd700;
     font-size: 16px;
 }
+.purchase-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.purchase-status.completed {
+    background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+    color: white;
+}
+
+.purchase-status.pending {
+    background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+    color: white;
+}
+
+.purchase-status.cancelled {
+    background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+    color: white;
+}
