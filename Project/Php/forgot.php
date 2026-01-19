@@ -315,3 +315,78 @@ $conn->close();
                         return false;
                     }
                 });
+                            <?php elseif ($step == 2): ?>
+                const resetForm = document.getElementById('resetForm');
+                const newPasswordInput = document.getElementById('new_password');
+                const confirmPasswordInput = document.getElementById('confirm_password');
+                
+                resetForm.addEventListener('submit', function(e) {
+                    let isValid = true;
+                    
+                    // Clear previous errors
+                    clearErrors();
+                    
+                    // Validate new password
+                    const newPassword = newPasswordInput.value;
+                    if (!newPassword) {
+                        showError(newPasswordInput, "New password is required!");
+                        isValid = false;
+                    } else if (newPassword.length < 6) {
+                        showError(newPasswordInput, "Password must be at least 6 characters!");
+                        isValid = false;
+                    }
+                    
+                    // Validate confirm password
+                    const confirmPassword = confirmPasswordInput.value;
+                    if (!confirmPassword) {
+                        showError(confirmPasswordInput, "Please confirm your password!");
+                        isValid = false;
+                    } else if (newPassword !== confirmPassword) {
+                        showError(confirmPasswordInput, "Passwords do not match!");
+                        isValid = false;
+                    }
+                    
+                    if (!isValid) {
+                        e.preventDefault();
+                    }
+                });
+                
+                // Real-time password match check
+                confirmPasswordInput.addEventListener('input', function() {
+                    const newPassword = newPasswordInput.value;
+                    const confirmPassword = this.value;
+                    
+                    if (confirmPassword && newPassword !== confirmPassword) {
+                        this.classList.add('error');
+                    } else {
+                        this.classList.remove('error');
+                    }
+                });
+                
+                function showError(input, message) {
+                    input.classList.add('error');
+                    
+                    // Create error element
+                    const error = document.createElement('div');
+                    error.className = 'field-error';
+                    error.textContent = message;
+                    error.style.color = '#721c24';
+                    error.style.fontSize = '14px';
+                    error.style.marginTop = '5px';
+                    
+                    input.parentNode.appendChild(error);
+                }
+                
+                function clearErrors() {
+                    document.querySelectorAll('.field-error').forEach(function(error) {
+                        error.remove();
+                    });
+                    document.querySelectorAll('.error').forEach(function(input) {
+                        input.classList.remove('error');
+                    });
+                }
+            <?php endif; ?>
+        });
+    </script>
+</body>
+</html>
