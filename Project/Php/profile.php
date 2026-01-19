@@ -175,3 +175,27 @@ $stmt->close();
                 <h2 id="profileName"><?php echo htmlspecialchars($user['name']); ?></h2>
                 <p class="user-email" id="profileEmail"><?php echo htmlspecialchars($user['email']); ?></p>
             </div>
+                        <!-- ================================
+                 PROFILE DETAILS SECTION
+                 ================================ -->
+            <div class="profile-details">
+                <div class="detail-item">
+                    <span class="detail-label">Age:</span>
+                    <span class="detail-value" id="profileAge"><?php echo htmlspecialchars($user['age']); ?> years</span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Address:</span>
+                    <span class="detail-value" id="profileAddress"><?php echo htmlspecialchars($user['address']); ?></span>
+                </div>
+                
+                <div class="detail-item">
+                    <span class="detail-label">Member Since:</span>
+                    <span class="detail-value" id="profileMemberSince">
+                        <?php 
+                            $date = new DateTime($user['created_at']);
+                            echo $date->format('F j, Y');
+                        ?>
+                    </span>
+                </div>
+            </div>
