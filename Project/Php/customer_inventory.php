@@ -114,3 +114,72 @@ if (isset($_GET['action'])) {
     }
     exit();
 }
+// Shopping cart functions
+function addToCart() {
+    global $conn;
+    
+    $data = json_decode(file_get_contents('php://input'), true);
+    $item_id = intval($data['item_id'] ?? 0);
+    $quantity = intval($data['quantity'] ?? 1);
+    
+    error_log("addToCart called: item_id=$item_id, quantity=$quantity");
+    
+    if ($item_id <= 0 || $quantity <= 0) {
+        echo json_encode(['success' => false, 'message' => 'Invalid item or quantity']);
+        return;
+    }
+    
+    // Check item availability
+    $check_query = $conn->prepare("SELECT * FROM inventory WHERE id = ? AND quantity >= ?");
+    $check_query->bind_param("ii", $item_id, $quantity);
+    $check_query->execute();
+    $item_result = $check_query->get_result();
+    
+    if ($item_result->num_rows === 0) {
+        echo json_encode(['success' => false, 'message' => 'Item not available in requested quantity']);
+        return;
+    }
+    
+    $item = $item_result->fetch_assoc();
+    
+    // Initialize cart if not exists
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
+    }
+    
+    // Check if item already in cart
+    $found = false;
+    foreach ($_SESSION['cart'] as &$cart_item) {
+        if ($cart_item['id'] == $item_id) {
+            $new_quantity = $cart_item['quantity'] + $quantity;
+            
+            // Check if total exceeds available quantity
+            $check_quantity = $conn->prepare("SELECT quantity FROM inventory WHERE id = ?");
+            $check_quantity->bind_param("i", $item_id);
+            $check_quantity->execute();
+            $check_result = $check_quantity->get_result();
+            $stock = $check_result->fetch_assoc()['quantity'];
+            
+            if ($new_quantity <= $stock) {
+                $cart_item['quantity'] = $new_quantity;
+                $found = true;
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Cannot add more than available stock']);
+                return;
+            }
+            break;
+        }
+    }
+    
+    if (!$found) {
+        $_SESSION['cart'][] = [
+            'id' => $item_id,
+            'name' => $item['name'],
+            'price' => $item['price'],
+            'quantity' => $quantity,
+            'category' => $item['category']
+        ];
+    }
+    
+    echo json_encode(['success' => true, 'cart' => $_SESSION['cart'], 'cart_count' => count($_SESSION['cart'])]);
+}
