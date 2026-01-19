@@ -208,3 +208,28 @@ $conn->close();
     </style>
 </head>
 <body>
+        <div class="login-container forgot-container">
+        <h2>Reset Password</h2>
+        
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step <?php echo $step >= 1 ? 'active' : ''; ?> <?php echo $step > 1 ? 'completed' : ''; ?>">
+                <div class="step-number">1</div>
+                <div class="step-label">Verify Email</div>
+            </div>
+            <div class="step <?php echo $step >= 2 ? 'active' : ''; ?> <?php echo $step > 2 ? 'completed' : ''; ?>">
+                <div class="step-number">2</div>
+                <div class="step-label">New Password</div>
+            </div>
+            <div class="step <?php echo $step >= 3 ? 'active' : ''; ?>">
+                <div class="step-number">3</div>
+                <div class="step-label">Complete</div>
+            </div>
+        </div>
+        
+        <?php if (!empty($message)): ?>
+            <div class="message <?php echo $messageType; ?>">
+                <?php echo htmlspecialchars($message); ?>
+            </div>
+        <?php endif; ?>
+        
