@@ -290,3 +290,28 @@ $conn->close();
             </div>
         <?php endif; ?>
     </div>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            <?php if ($step == 1): ?>
+                const verifyForm = document.getElementById('verifyForm');
+                const emailInput = document.getElementById('email');
+                
+                verifyForm.addEventListener('submit', function(e) {
+                    const email = emailInput.value.trim();
+                    
+                    if (!email) {
+                        e.preventDefault();
+                        alert("Email is required!");
+                        emailInput.focus();
+                        return false;
+                    }
+                    
+                    // Simple email validation
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        e.preventDefault();
+                        alert("Please enter a valid email address!");
+                        emailInput.focus();
+                        return false;
+                    }
+                });
