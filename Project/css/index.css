@@ -1,26 +1,18 @@
-/* ================================
-   RESET AND BASE STYLES
-   ================================ */
-
-/* Reset all margins, padding, and set box-sizing */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body base styles */
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f5f5f5;
 }
-/* ================================
-   HEADER/TOP SECTION
-   ================================ */
 
-/* Main header container */
+/* Header/Top Section */
 #top {
     display: flex;
     justify-content: space-between;
@@ -37,12 +29,10 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Top left section */
 .top-left {
     flex: 1;
 }
 
-/* Top center section */
 .top-center {
     flex: 2;
     text-align: center;
@@ -51,13 +41,11 @@ body {
     letter-spacing: 1px;
 }
 
-/* Top right section */
 .top-right {
     flex: 1;
     text-align: right;
 }
 
-/* Top right links */
 .top-right a {
     color: white;
     text-decoration: none;
@@ -65,15 +53,11 @@ body {
     transition: color 0.3s;
 }
 
-/* Top right links hover effect */
 .top-right a:hover {
     color: #3498db;
 }
-/* ================================
-   LOGO LINK
-   ================================ */
 
-/* Logo link styling */
+/* Logo Link */
 #logo-link {
     font-size: 28px;
     font-weight: bold;
@@ -89,24 +73,19 @@ body {
     transition: all 0.3s;
 }
 
-/* Logo link hover animation */
 #logo-link:hover {
     transform: rotate(360deg) scale(1.1);
     background: #3498db;
     color: white;
 }
-/* ================================
-   DROPDOWN STYLES
-   ================================ */
 
-/* Dropdown container */
+/* Dropdown Styles */
 .dropdown {
     position: relative;
     display: inline-block;
     cursor: pointer;
 }
 
-/* User profile section in dropdown */
 .user-profile {
     display: flex;
     align-items: center;
@@ -116,12 +95,10 @@ body {
     transition: background 0.3s;
 }
 
-/* User profile hover effect */
 .user-profile:hover {
     background: rgba(255, 255, 255, 0.1);
 }
 
-/* User icon circle */
 .user-icon {
     width: 40px;
     height: 40px;
@@ -136,7 +113,6 @@ body {
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-/* User name link */
 .user-name {
     color: white;
     text-decoration: none;
@@ -144,12 +120,10 @@ body {
     transition: color 0.3s;
 }
 
-/* User name hover effect */
 .user-name:hover {
     color: #3498db;
 }
 
-/* Dropdown content (hidden by default) */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -166,14 +140,12 @@ body {
     padding: 10px 0;
 }
 
-/* Show dropdown content */
 .dropdown-content.show {
     display: block;
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Dropdown menu items */
 .dropdown-content a {
     color: #333;
     padding: 12px 20px;
@@ -183,14 +155,12 @@ body {
     font-size: 15px;
 }
 
-/* Dropdown menu items hover effect */
 .dropdown-content a:hover {
     background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
     color: white;
     padding-left: 25px;
 }
 
-/* Dropdown separator */
 .dropdown-content hr {
     border: none;
     height: 1px;
@@ -198,21 +168,16 @@ body {
     margin: 5px 0;
 }
 
-/* Logout link special styling */
 .logout-link {
     color: #e74c3c !important;
 }
 
-/* Logout link hover effect */
 .logout-link:hover {
     color: white !important;
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
 }
-/* ================================
-   CENTER SECTION
-   ================================ */
 
-/* Main content center section */
+/* Center Section */
 #center {
     margin-top: 100px;
     padding: 40px 5%;
@@ -224,7 +189,6 @@ body {
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
-/* Welcome heading */
 .welcome {
     font-size: 36px;
     color: #2c3e50;
@@ -234,7 +198,6 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-/* Welcome message for logged in users */
 .welcome-message {
     font-size: 20px;
     color: #27ae60;
@@ -245,7 +208,6 @@ body {
     display: inline-block;
 }
 
-/* Information paragraph text */
 .info {
     font-size: 16px;
     line-height: 1.8;
@@ -255,11 +217,76 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-/* ================================
-   BOOK NOW BUTTON
-   ================================ */
 
-/* Book now button container */
+/* Services Section */
+.servh {
+    text-align: center;
+    margin: 60px 0 30px;
+    font-size: 32px;
+    color: #2c3e50;
+    position: relative;
+}
+
+.servh::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    margin: 10px auto;
+    border-radius: 2px;
+}
+
+#ser {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0 5%;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.service-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border-color: #3498db;
+}
+
+.sert {
+    font-size: 24px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.sert a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+.sert a:hover {
+    color: #3498db;
+}
+
+.serp {
+    color: #666;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* Book Now Button */
 #book {
     text-align: center;
     margin: 50px auto;
@@ -275,16 +302,12 @@ body {
     box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
 }
 
-/* Book now button hover effect */
 #book:hover {
     transform: translateX(-50%) translateY(-5px) scale(1.05);
     box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
 }
-/* ================================
-   INVENTORY SECTION
-   ================================ */
 
-/* Inventory heading */
+/* Inventory Section */
 .invh {
     text-align: center;
     margin: 60px 0 30px;
@@ -293,7 +316,6 @@ body {
     position: relative;
 }
 
-/* Inventory heading underline effect */
 .invh::after {
     content: '';
     display: block;
@@ -304,7 +326,6 @@ body {
     border-radius: 2px;
 }
 
-/* Inventory container */
 #inv {
     display: flex;
     justify-content: center;
@@ -314,7 +335,6 @@ body {
     margin-bottom: 40px;
 }
 
-/* Individual inventory item */
 .light {
     flex: 1;
     min-width: 250px;
@@ -326,13 +346,11 @@ body {
     transition: all 0.3s ease;
 }
 
-/* Inventory item hover effect */
 .light:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
-/* Inventory item image */
 .light img {
     width: 100%;
     height: 200px;
@@ -340,12 +358,10 @@ body {
     transition: transform 0.5s;
 }
 
-/* Inventory image hover zoom */
 .light:hover img {
     transform: scale(1.1);
 }
 
-/* Inventory item title */
 .invt {
     text-align: center;
     padding: 20px;
@@ -353,11 +369,7 @@ body {
     font-size: 22px;
 }
 
-/* ================================
-   BUY NOW BUTTON
-   ================================ */
-
-/* Buy now button container */
+/* Buy Now Button */
 #buy {
     text-align: center;
     margin: 50px auto;
@@ -373,16 +385,12 @@ body {
     box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
 }
 
-/* Buy now button hover effect */
 #buy:hover {
     transform: translateX(-50%) translateY(-5px) scale(1.05);
     box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
 }
-/* ================================
-   FOOTER SECTION
-   ================================ */
 
-/* Footer container */
+/* Footer */
 footer {
     background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
     color: white;
@@ -390,7 +398,6 @@ footer {
     margin-top: 60px;
 }
 
-/* Footer info container */
 #finfo {
     display: flex;
     justify-content: space-between;
@@ -400,13 +407,11 @@ footer {
     margin: 0 auto;
 }
 
-/* Footer paragraph sections */
 .fp {
     flex: 1;
     min-width: 300px;
 }
 
-/* Footer headings */
 .abou, .contact, .report {
     color: #3498db;
     margin-bottom: 20px;
@@ -415,7 +420,6 @@ footer {
     padding-bottom: 10px;
 }
 
-/* Footer heading underline */
 .abou::after, .contact::after, .report::after {
     content: '';
     position: absolute;
@@ -427,21 +431,112 @@ footer {
     border-radius: 1.5px;
 }
 
-/* Footer text paragraphs */
 .ap, .cp, .rp {
     color: #bdc3c7;
     line-height: 1.8;
     font-size: 15px;
 }
 
-/* Footer report link */
 .rp a {
     color: #3498db;
     text-decoration: none;
     font-weight: 500;
 }
 
-/* Footer report link hover */
 .rp a:hover {
     text-decoration: underline;
+}
+
+/* Social Media */
+#social {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#social a {
+    display: inline-block;
+    transition: all 0.3s;
+}
+
+#social a:hover {
+    transform: translateY(-5px) rotate(5deg);
+}
+
+#fb, #tw, #ig {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+#fb:hover {
+    box-shadow: 0 5px 15px rgba(59, 89, 152, 0.4);
+}
+
+#tw:hover {
+    box-shadow: 0 5px 15px rgba(29, 161, 242, 0.4);
+}
+
+#ig:hover {
+    box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .top-center {
+        font-size: 18px;
+    }
+    
+    #center {
+        margin-top: 80px;
+        padding: 20px;
+    }
+    
+    .welcome {
+        font-size: 28px;
+    }
+    
+    .service-item, .light {
+        min-width: 100%;
+    }
+    
+    #ser, #inv {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .servh, .invh {
+        font-size: 28px;
+    }
+    
+    #book, #buy {
+        width: 80%;
+    }
+    
+    #finfo {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    #top {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .top-left, .top-center, .top-right {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .welcome {
+        font-size: 24px;
+    }
+    
+    .service-item {
+        padding: 20px;
+    }
 }
