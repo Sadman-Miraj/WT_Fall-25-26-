@@ -17,3 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     loadCartItems();
     updateCartSummary();
+    // Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded - Inventory page initialized');
+    console.log('Customer Data:', window.customerData);
+    console.log('Products:', window.products);
+    console.log('Initial Cart:', cart);
+    
+    // Initialize cart display
+    updateCartCount();
+    loadCartItems();
+    updateCartSummary();
