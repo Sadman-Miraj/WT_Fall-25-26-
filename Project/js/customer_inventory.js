@@ -381,3 +381,124 @@ function updateCartSummary() {
     
     console.log('Cart summary updated:', { subtotal, tierDiscount, pointsDiscount, total });
 }
+// Apply points discount
+function applyPoints() {
+    const pointsToUseInput = document.getElementById('pointsToUse');
+    if (!pointsToUseInput) {
+        showMessage('Points input not found', 'error');
+        return;
+    }
+    
+    const pointsToUse = parseInt(pointsToUseInput.value);
+    
+    if (!pointsToUse || pointsToUse < 1) {
+        showMessage('Enter valid points', 'error');
+        return;
+    }
+    
+    const subtotal = cart.reduce((total, item) => total + (item.price * (item.quantity || 0)), 0);
+    const tierDiscount = (subtotal * (window.customerData?.discountPercentage || 0)) / 100;
+    const afterTierDiscount = subtotal - tierDiscount;
+    
+    fetch('customer_inventory.php?action=apply_points_discount', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            points: pointsToUse,
+            cart_total: afterTierDiscount
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Apply points response:', data);
+        if (data.success) {
+            pointsDiscount = data.discount_amount;
+            pointsUsed = data.points_used;
+            updateCartSummary();
+            showMessage(`Applied ${pointsUsed} points for ৳${pointsDiscount.toFixed(2)} discount`, 'success');
+            
+            // Update customer points display
+            const customerPointsEl = document.getElementById('customerPoints');
+            if (customerPointsEl && data.remaining_points !== undefined) {
+                customerPointsEl.textContent = data.remaining_points;
+                window.customerData.points = data.remaining_points;
+            }
+        } else {
+            showMessage(data.message || 'Error applying points', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error applying points', 'error');
+    });
+}
+// Process checkout
+function processCheckout() {
+    if (isProcessing) return;
+    
+    if (!cart || cart.length === 0) {
+        showMessage('Your cart is empty', 'error');
+        return;
+    }
+    
+    if (!confirm('Proceed with checkout?')) return;
+    
+    isProcessing = true;
+    
+    const usePointsCheckbox = document.getElementById('usePoints');
+    const checkoutData = {
+        use_points: usePointsCheckbox?.checked || false,
+        points_to_use: pointsUsed
+    };
+    
+    fetch('customer_inventory.php?action=checkout', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(checkoutData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Checkout response:', data);
+        if (data.success) {
+            // Update customer points display
+            const customerPointsEl = document.getElementById('customerPoints');
+            if (customerPointsEl && data.new_points !== undefined) {
+                customerPointsEl.textContent = data.new_points;
+                window.customerData.points = data.new_points;
+            }
+            
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            loadCartItems();
+            updateCartSummary();
+            
+            // Reset points discount
+            pointsDiscount = 0;
+            pointsUsed = 0;
+            if (usePointsCheckbox) {
+                usePointsCheckbox.checked = false;
+                const pointsInputGroup = document.getElementById('pointsInputGroup');
+                if (pointsInputGroup) {
+                    pointsInputGroup.style.display = 'none';
+                }
+            }
+            
+            showMessage(
+                `Order placed successfully! You earned ${data.points_earned} points. Total discount: ৳${data.total_discount?.toFixed(2) || 0}`,
+                'success'
+            );
+            
+            closeCartFunc();
+        } else {
+            showMessage(data.message || 'Error processing order', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error processing order', 'error');
+    })
+    .finally(() => {
+        isProcessing = false;
+    });
+}
