@@ -80,3 +80,30 @@ h1 {
     background: #ff8c00;
     border-radius: 50%;
 }
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    border: 2px dashed #333;
+}
+
+.empty-state i {
+    font-size: 48px;
+    color: #ff8c00;
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+.empty-state p {
+    color: #ffa500;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.empty-state .subtext {
+    color: #888;
+    font-size: 14px;
+    font-weight: 400;
+}
