@@ -27,3 +27,33 @@ if ($stmt_emergency) {
     }
     $stmt_emergency->close();
 }
+// Home services
+$sql_home = "SELECT * FROM home WHERE name = ?";
+$stmt_home = $conn->prepare($sql_home);
+if ($stmt_home) {
+    $stmt_home->bind_param("s", $user_name);
+    $stmt_home->execute();
+    $result_home = $stmt_home->get_result();
+    while ($row = $result_home->fetch_assoc()) {
+        $row['service_type'] = 'home';
+        $services[] = $row;
+    }
+    $stmt_home->close();
+}
+
+// Regular services
+$sql_regular = "SELECT * FROM regular WHERE name = ?";
+$stmt_regular = $conn->prepare($sql_regular);
+if ($stmt_regular) {
+    $stmt_regular->bind_param("s", $user_name);
+    $stmt_regular->execute();
+    $result_regular = $stmt_regular->get_result();
+    while ($row = $result_regular->fetch_assoc()) {
+        $row['service_type'] = 'regular';
+        $services[] = $row;
+    }
+    $stmt_regular->close();
+}
+
+$conn->close();
+?>
