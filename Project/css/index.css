@@ -255,3 +255,28 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+/* ================================
+   BOOK NOW BUTTON
+   ================================ */
+
+/* Book now button container */
+#book {
+    text-align: center;
+    margin: 50px auto;
+    width: 200px;
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    padding: 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+}
+
+/* Book now button hover effect */
+#book:hover {
+    transform: translateX(-50%) translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(46, 204, 113, 0.4);
+}
