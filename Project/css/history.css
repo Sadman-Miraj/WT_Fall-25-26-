@@ -334,3 +334,51 @@ h1 {
     word-break: break-word;
     line-height: 1.4;
 }
+.service-date-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 140, 0, 0.1);
+    color: #ff8c00;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.service-date-badge i {
+    font-size: 12px;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.status-badge i {
+    font-size: 10px;
+}
+
+.status-badge.completed {
+    background: rgba(50, 205, 50, 0.1);
+    color: #32cd32;
+    border: 1px solid rgba(50, 205, 50, 0.3);
+}
+
+.status-badge.pending {
+    background: rgba(255, 140, 0, 0.1);
+    color: #ff8c00;
+    border: 1px solid rgba(255, 140, 0, 0.3);
+}
+
+.status-badge.cancelled {
+    background: rgba(255, 51, 51, 0.1);
+    color: #ff3333;
+    border: 1px solid rgba(255, 51, 51, 0.3);
+}
