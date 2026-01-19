@@ -232,4 +232,20 @@ $conn->close();
                 <?php echo htmlspecialchars($message); ?>
             </div>
         <?php endif; ?>
-        
+                <?php if ($step == 1): ?>
+            <!-- Step 1: Email Verification -->
+            <form method="post" action="" id="verifyForm">
+                <p class="instructions">Enter your email address to verify your account.</p>
+                
+                <div class="form-group">
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($email); ?>" required>
+                </div>
+                
+                <input type="hidden" name="verify_email" value="1">
+                <button type="submit" class="login-btn">Verify Email</button>
+                
+                <div class="back-to-login">
+                    <a href="login.php" class="link">← Back to Login</a>
+                </div>
+            </form>
