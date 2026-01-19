@@ -279,3 +279,58 @@ h1 {
     flex: 1;
     min-width: 200px;
 }
+.service-type {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.service-type.emergency {
+    background: linear-gradient(135deg, #ff3333 0%, #cc0000 100%);
+    color: white;
+}
+
+.service-type.home {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+}
+
+.service-type.regular {
+    background: linear-gradient(135deg, #32cd32 0%, #228b22 100%);
+    color: white;
+}
+
+.service-details {
+    margin: 15px 0;
+}
+
+.service-details .detail-row {
+    display: flex;
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 15px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+}
+
+.service-details .detail-row:last-child {
+    border-bottom: none;
+}
+
+.service-details .detail-label {
+    color: #ffa500;
+    font-weight: 600;
+    min-width: 120px;
+    padding-right: 10px;
+}
+
+.service-details .detail-value {
+    flex: 1;
+    word-break: break-word;
+    line-height: 1.4;
+}
