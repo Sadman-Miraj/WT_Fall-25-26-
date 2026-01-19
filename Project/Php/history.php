@@ -10,6 +10,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 include "../db/db.php";
 
 $user_name = $_SESSION['user_name'];
+
 // Get user's service history
 $services = [];
 
@@ -27,6 +28,7 @@ if ($stmt_emergency) {
     }
     $stmt_emergency->close();
 }
+
 // Home services
 $sql_home = "SELECT * FROM home WHERE name = ?";
 $stmt_home = $conn->prepare($sql_home);
@@ -57,6 +59,7 @@ if ($stmt_regular) {
 
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,8 +76,8 @@ $conn->close();
         <div class="back-link">
             <a href="profile.php"><i class="fas fa-arrow-left"></i> Back to Profile</a>
         </div>
-
-                <!-- Services Section -->
+        
+        <!-- Services Section -->
         <div class="section">
             <h2 class="section-title">Services History</h2>
             
@@ -86,7 +89,7 @@ $conn->close();
                 </div>
             <?php else: ?>
                 <div class="services-list">
-                                        <?php foreach ($services as $service): ?>
+                    <?php foreach ($services as $service): ?>
                     <div class="service-card">
                         <div class="service-header">
                             <h3>
@@ -107,7 +110,7 @@ $conn->close();
                                 <?php echo ucfirst($service_type); ?>
                             </span>
                         </div>
-                                                <div class="service-details">
+                        <div class="service-details">
                             <!-- Show all available data -->
                             <?php foreach ($service as $key => $value): ?>
                                 <?php if (!in_array($key, ['service_type', 'service_date']) && !empty($value)): ?>
@@ -133,7 +136,8 @@ $conn->close();
                                 </span>
                             </div>
                         </div>
-                                                <!-- Service date badge -->
+                        
+                        <!-- Service date badge -->
                         <div class="service-date-badge">
                             <i class="fas fa-calendar-alt"></i>
                             <?php 
@@ -151,7 +155,8 @@ $conn->close();
                 </div>
             <?php endif; ?>
         </div>
-                <!-- Purchases Section (Optional) -->
+        
+        <!-- Purchases Section (Optional) -->
         <div class="section">
             <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Purchase History</h2>
             <div class="empty-state">
