@@ -6,6 +6,7 @@ let cart = window.cart || [];
 let pointsDiscount = 0;
 let pointsUsed = 0;
 let isProcessing = false;
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded - Inventory page initialized');
@@ -17,18 +18,23 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     loadCartItems();
     updateCartSummary();
-    // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded - Inventory page initialized');
-    console.log('Customer Data:', window.customerData);
-    console.log('Products:', window.products);
-    console.log('Initial Cart:', cart);
     
-    // Initialize cart display
-    updateCartCount();
-    loadCartItems();
-    updateCartSummary();
-        // Points checkbox toggle
+    // Initialize filters
+    const filters = document.querySelectorAll('.filter-btn');
+    if (filters && filters.length > 0) {
+        filters.forEach(btn => {
+            btn.addEventListener('click', function() {
+                filters.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const cat = this.dataset.category;
+                document.querySelectorAll('.product-card').forEach(item => {
+                    item.style.display = (cat === 'all' || item.dataset.category === cat) ? 'flex' : 'none';
+                });
+            });
+        });
+    }
+    
+    // Points checkbox toggle
     const usePoints = document.getElementById('usePoints');
     const pointsInputGroup = document.getElementById('pointsInputGroup');
     if (usePoints) {
@@ -58,37 +64,20 @@ document.addEventListener('DOMContentLoaded', function() {
         cartIcon.addEventListener('click', openCart);
         console.log('Cart icon event listener added');
     }
-        // Points checkbox toggle
-    const usePoints = document.getElementById('usePoints');
-    const pointsInputGroup = document.getElementById('pointsInputGroup');
-    if (usePoints) {
-        usePoints.addEventListener('change', function() {
-            if (this.checked) {
-                if (pointsInputGroup) {
-                    pointsInputGroup.style.display = 'flex';
-                    const pointsToUseInput = document.getElementById('pointsToUse');
-                    if (pointsToUseInput) {
-                        pointsToUseInput.max = window.customerData?.points || 0;
-                    }
-                }
-            } else {
-                if (pointsInputGroup) {
-                    pointsInputGroup.style.display = 'none';
-                }
-                pointsDiscount = 0;
-                pointsUsed = 0;
-                updateCartSummary();
-            }
-        });
+    
+    // Close cart button
+    const closeCart = document.getElementById('closeCart');
+    if (closeCart) {
+        closeCart.addEventListener('click', closeCartFunc);
     }
     
-    // Cart icon click event
-    const cartIcon = document.getElementById('cartIcon');
-    if (cartIcon) {
-        cartIcon.addEventListener('click', openCart);
-        console.log('Cart icon event listener added');
+    // Cart overlay click
+    const cartOverlay = document.getElementById('cartOverlay');
+    if (cartOverlay) {
+        cartOverlay.addEventListener('click', closeCartFunc);
     }
-        // Add event listeners to all "Add to Cart" buttons
+    
+    // Add event listeners to all "Add to Cart" buttons
     document.querySelectorAll('.add-to-cart-btn').forEach(button => {
         const onclick = button.getAttribute('onclick');
         if (onclick && onclick.includes('addToCart')) {
@@ -102,7 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-        // Add event listeners to quantity buttons
+    
+    // Add event listeners to quantity buttons
     document.querySelectorAll('.qty-btn').forEach(button => {
         const onclick = button.getAttribute('onclick');
         if (onclick && onclick.includes('updateQuantity')) {
@@ -117,7 +107,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-        // Apply points button
+    
+    // Apply points button
     const applyPointsBtn = document.querySelector('.apply-points-btn');
     if (applyPointsBtn) {
         applyPointsBtn.addEventListener('click', function(e) {
@@ -137,6 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('All event listeners added');
 });
+
 // Cart Toggle functions
 function openCart() {
     console.log('Opening cart');
@@ -165,6 +157,7 @@ function closeCartFunc() {
     }
     document.body.style.overflow = 'auto';
 }
+
 // Add to Cart
 function addToCart(itemId) {
     console.log('addToCart called with itemId:', itemId);
@@ -222,6 +215,7 @@ function addToCart(itemId) {
         isProcessing = false;
     });
 }
+
 // Update quantity in product card
 function updateQuantity(itemId, change) {
     const qtyInput = document.getElementById('qty-' + itemId);
@@ -241,6 +235,7 @@ function updateQuantity(itemId, change) {
         qtyInput.value = currentQty;
     }
 }
+
 // Load cart items
 function loadCartItems() {
     const cartItems = document.getElementById('cartItems');
@@ -287,6 +282,7 @@ function loadCartItems() {
     });
     cartItems.innerHTML = html;
 }
+
 // Update cart item quantity
 function updateCartItem(itemId, quantity) {
     quantity = parseInt(quantity);
@@ -321,6 +317,7 @@ function updateCartItem(itemId, quantity) {
         showMessage('Error updating cart', 'error');
     });
 }
+
 // Remove from cart
 function removeFromCart(itemId) {
     console.log('removeFromCart called:', itemId);
@@ -350,6 +347,7 @@ function removeFromCart(itemId) {
         showMessage('Error removing item', 'error');
     });
 }
+
 // Update cart count
 function updateCartCount() {
     const cartCount = document.getElementById('cartCount');
@@ -362,6 +360,7 @@ function updateCartCount() {
     cartCount.textContent = count;
     console.log('Cart count updated:', count);
 }
+
 // Update cart summary
 function updateCartSummary() {
     const subtotal = cart.reduce((total, item) => total + (item.price * (item.quantity || 0)), 0);
@@ -381,6 +380,7 @@ function updateCartSummary() {
     
     console.log('Cart summary updated:', { subtotal, tierDiscount, pointsDiscount, total });
 }
+
 // Apply points discount
 function applyPoints() {
     const pointsToUseInput = document.getElementById('pointsToUse');
@@ -432,6 +432,7 @@ function applyPoints() {
         showMessage('Error applying points', 'error');
     });
 }
+
 // Process checkout
 function processCheckout() {
     if (isProcessing) return;
@@ -502,6 +503,7 @@ function processCheckout() {
         isProcessing = false;
     });
 }
+
 // Show message
 function showMessage(text, type) {
     const message = document.getElementById('message');
@@ -518,6 +520,7 @@ function showMessage(text, type) {
         message.style.display = 'none';
     }, 5000);
 }
+
 // Make functions globally available
 window.addToCart = addToCart;
 window.updateQuantity = updateQuantity;
