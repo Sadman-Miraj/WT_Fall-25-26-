@@ -88,3 +88,17 @@ document.addEventListener('DOMContentLoaded', function() {
         cartIcon.addEventListener('click', openCart);
         console.log('Cart icon event listener added');
     }
+        // Add event listeners to all "Add to Cart" buttons
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        const onclick = button.getAttribute('onclick');
+        if (onclick && onclick.includes('addToCart')) {
+            const match = onclick.match(/addToCart\((\d+)\)/);
+            if (match) {
+                const itemId = match[1];
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    addToCart(itemId);
+                });
+            }
+        }
+    });
