@@ -1,11 +1,26 @@
+<?php
+session_start();
+
+// Set cookie if not already set
+if (!isset($_COOKIE['visitor']) && !isset($_SESSION['user_id'])) {
+    setcookie('visitor', 'true', time() + (86400 * 30), "/"); // 30 days
+}
+
+// Check if user is logged in
+$isLoggedIn = isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+$userName = $isLoggedIn ? $_SESSION['user_name'] : '';
+$userInitial = $isLoggedIn ? strtoupper(substr($userName, 0, 1)) : '';
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automobiles Solution</title>
     <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
-
 <div id="top">
     <div class="top-left">
         <a id="logo-link" href="index.php">AS</a>
@@ -17,15 +32,34 @@
 
     <div class="top-right">
         <p>
-            <a href="login.php">Login</a>
-        <a href="signup.php">Sign Up</a>
+            <?php if ($isLoggedIn): ?>
+                <div class="dropdown">
+                    <div class="user-profile">
+                        <div class="user-icon"><?php echo $userInitial; ?></div>
+                        <a href="profile.php" class="user-name"><?php echo htmlspecialchars($userName); ?></a>
+                    </div>
+                    <div class="dropdown-content">
+                        <a href="profile.php">Profile</a>
+                        <hr>
+                        <a href="logout.php" class="logout-link">Logout</a>
+                    </div>
+                </div>
+            <?php else: ?>
+                <a href="login.php">Login</a> | 
+                <a href="signup.php">Sign Up</a>
+            <?php endif; ?>
         </p>
-        
     </div>
 </div>
+
 <!---------------------------------center----------------------------------->
 <div id="center">
     <h1 class="welcome">Welcome to Automobiles Solution</h1>
+    <?php if ($isLoggedIn): ?>
+        <div class="welcome-message">
+            Welcome back, <strong><?php echo htmlspecialchars($userName); ?></strong>!
+        </div>
+    <?php endif; ?>
     <p class="info">Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
         Illum explicabo dolores, qui eveniet alias magni fugit. Porro, quaerat. 
         Ut laborum, consectetur sequi explicabo repellat dicta earum sed praesentium 
@@ -53,21 +87,21 @@
 <h2 class="servh">Our Services</h2>
 <div id="ser">
     <div class="service-item">
-        <h3 class="sert">Regular</h3>
+        <h3 class="sert" ><a  href="regular.php"  style="text-decoration:none; color:black;">Regular</a> </h3>
         <p class="serp">
 Routine vehicle maintenance and checkups to keep your car running smoothly. 
 Ideal for scheduled servicing, inspections, and minor repairs.
         </p>
     </div>
     <div class="service-item">
-        <h3 class="sert">Emergency</h3>
+        <h3 class="sert"><a  href="emergency.php"  style="text-decoration:none; color:black;">Emergency</a></h3>
         <p class="serp">
 24/7 roadside assistance for breakdowns, accidents, or urgent repairs.
 Fast response times to get you back on the road quickly and safely.
         </p>
     </div>
     <div class="service-item">
-        <h3 class="sert">Home</h3>
+        <h3 class="sert"><a  href="home.php"  style="text-decoration:none; color:black;">Home</a></h3>
         <p class="serp">
 Convenient vehicle servicing at your home or workplace.
 Professional mechanics come to you for oil changes, tire rotations, and more.
@@ -101,7 +135,7 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
     </div>
 </div>
 <h1 id="buy">
-    <a href="buy.php" style="color: white; text-decoration: none;">BUY Now</a>
+    <a href="customer_inventory.php" style="color: white; text-decoration: none;">BUY Now</a>
 </h1>
         
 
@@ -144,5 +178,7 @@ Professional mechanics come to you for oil changes, tire rotations, and more.
 
 </div>
 </footer>
+
+<script src="../js/index.js"></script>
 </body>
 </html>
