@@ -378,3 +378,70 @@ body {
     transform: translateX(-50%) translateY(-5px) scale(1.05);
     box-shadow: 0 15px 30px rgba(231, 76, 60, 0.4);
 }
+/* ================================
+   FOOTER SECTION
+   ================================ */
+
+/* Footer container */
+footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+    color: white;
+    padding: 50px 5% 30px;
+    margin-top: 60px;
+}
+
+/* Footer info container */
+#finfo {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer paragraph sections */
+.fp {
+    flex: 1;
+    min-width: 300px;
+}
+
+/* Footer headings */
+.abou, .contact, .report {
+    color: #3498db;
+    margin-bottom: 20px;
+    font-size: 22px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Footer heading underline */
+.abou::after, .contact::after, .report::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #3498db;
+    border-radius: 1.5px;
+}
+
+/* Footer text paragraphs */
+.ap, .cp, .rp {
+    color: #bdc3c7;
+    line-height: 1.8;
+    font-size: 15px;
+}
+
+/* Footer report link */
+.rp a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Footer report link hover */
+.rp a:hover {
+    text-decoration: underline;
+}
