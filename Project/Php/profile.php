@@ -133,3 +133,17 @@ function updateProfile() {
     }
     $stmt->close();
 }
+// ================================
+// INITIAL PAGE LOAD DATA
+// ================================
+
+// Get user details for initial page load
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM signup WHERE id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+$stmt->close();
+?>
