@@ -86,3 +86,31 @@ function getTierDiscount($tier) {
 }
 
 $discount_percentage = getTierDiscount($customer['loyalty_tier'] ?? 'none');
+// Handle AJAX requests
+if (isset($_GET['action'])) {
+    header('Content-Type: application/json');
+    
+    switch ($_GET['action']) {
+        case 'get_cart':
+            echo json_encode(['success' => true, 'cart' => $_SESSION['cart'] ?? []]);
+            break;
+        case 'add_to_cart':
+            addToCart();
+            break;
+        case 'update_cart':
+            updateCart();
+            break;
+        case 'remove_from_cart':
+            removeFromCart();
+            break;
+        case 'checkout':
+            checkout();
+            break;
+        case 'apply_points_discount':
+            applyPointsDiscount();
+            break;
+        default:
+            echo json_encode(['success' => false, 'message' => 'Invalid action']);
+    }
+    exit();
+}
