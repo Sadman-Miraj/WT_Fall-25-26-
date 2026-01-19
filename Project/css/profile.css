@@ -140,3 +140,44 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
 }
+.back-link {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: #ff8c00;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #ff8c00;
+    background: #1a1a1a;
+}
+
+.back-link a:hover {
+    color: #ffd700;
+    background: #2a2a2a;
+}
+
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+.message.success {
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.2), rgba(0, 100, 0, 0.2));
+    color: #90ee90;
+    border: 1px solid #32cd32;
+}
+
+.message.error {
+    background: linear-gradient(135deg, rgba(178, 34, 34, 0.2), rgba(139, 0, 0, 0.2));
+    color: #ff6b6b;
+    border: 1px solid #ff3333;
+}
