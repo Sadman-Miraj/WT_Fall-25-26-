@@ -109,3 +109,102 @@ $conn->close();
     <title>Forgot Password</title>
     <link rel="stylesheet" href="../css/login.css">
     <style>
+                .forgot-container {
+            max-width: 500px;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: #e1e5e9;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e1e5e9;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+        
+        .step.active .step-number {
+            background: #667eea;
+            color: white;
+            transform: scale(1.1);
+        }
+        
+        .step.completed .step-number {
+            background: #28a745;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+        }
+        
+        .step.active .step-label {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .password-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .success-icon {
+            font-size: 48px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
