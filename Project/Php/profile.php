@@ -1,10 +1,6 @@
 <?php
 session_start();
 
-// ================================
-// PHP SESSION & AUTHENTICATION
-// ================================
-
 // Redirect to login if not logged in
 if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
     header("Location: auth/login.php");
@@ -13,11 +9,7 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
 
 include "../db/db.php";
 
-// ================================
-// AJAX REQUEST HANDLER SETUP
-// ================================
-
-// Handle AJAX POST requests
+// Handle AJAX requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     header('Content-Type: application/json');
     
@@ -31,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     exit();
 }
 
-// Handle AJAX GET requests
+// Handle GET AJAX requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     header('Content-Type: application/json');
     
@@ -45,11 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action'])) {
     exit();
 }
 
-// ================================
-// GET PROFILE FUNCTION
-// ================================
-
-// Function to get profile data via AJAX
+// Function to get profile data
 function getProfile() {
     global $conn;
     
@@ -74,11 +62,7 @@ function getProfile() {
     $stmt->close();
 }
 
-// ================================
-// UPDATE PROFILE FUNCTION
-// ================================
-
-// Function to update profile data via AJAX
+// Function to update profile
 function updateProfile() {
     global $conn;
     
@@ -133,9 +117,6 @@ function updateProfile() {
     }
     $stmt->close();
 }
-// ================================
-// INITIAL PAGE LOAD DATA
-// ================================
 
 // Get user details for initial page load
 $user_id = $_SESSION['user_id'];
@@ -147,6 +128,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $stmt->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,17 +138,12 @@ $stmt->close();
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
-        <!-- ================================
-         MAIN PROFILE CONTAINER
-         ================================ -->
     <div class="profile-container">
         <h1>My Profile</h1>
         
         <!-- Message Area -->
         <div id="message" class="message"></div>
-                <!-- ================================
-             PROFILE CARD
-             ================================ -->
+        
         <div class="profile-card">
             <div class="profile-header">
                 <div class="profile-avatar" id="profileAvatar">
@@ -175,9 +152,7 @@ $stmt->close();
                 <h2 id="profileName"><?php echo htmlspecialchars($user['name']); ?></h2>
                 <p class="user-email" id="profileEmail"><?php echo htmlspecialchars($user['email']); ?></p>
             </div>
-                        <!-- ================================
-                 PROFILE DETAILS SECTION
-                 ================================ -->
+            
             <div class="profile-details">
                 <div class="detail-item">
                     <span class="detail-label">Age:</span>
@@ -199,9 +174,7 @@ $stmt->close();
                     </span>
                 </div>
             </div>
-                        <!-- ================================
-                 PROFILE ACTIONS SECTION
-                 ================================ -->
+            
             <div class="profile-actions">
                 <button class="btn btn-primary" onclick="openEditModal()">Edit Profile</button>
                 <a href="history.php" class="btn btn-history">My History</a>
@@ -209,17 +182,13 @@ $stmt->close();
                 <a href="logout.php" class="btn btn-danger">Logout</a>
             </div>
         </div>
-                <!-- ================================
-             BACK LINK
-             ================================ -->
+        
         <div class="back-link">
             <a href="index.php">← Back to Home</a>
         </div>
     </div>
-
-        <!-- ================================
-         EDIT PROFILE MODAL
-         ================================ -->
+    
+    <!-- Edit Profile Modal -->
     <div id="editModal" class="modal">
         <div class="modal-content">
             <h2>Edit Profile</h2>
@@ -246,9 +215,8 @@ $stmt->close();
             </form>
         </div>
     </div>
-    <?php
-// ================================
-// DATABASE CONNECTION CLOSE
-// ================================
-$conn->close();
-?>
+    
+    <script src="../js/profile.js"></script>
+</body>
+</html>
+<?php $conn->close(); ?>
