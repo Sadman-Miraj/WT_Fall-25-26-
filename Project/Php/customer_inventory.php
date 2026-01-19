@@ -47,3 +47,42 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
     $customer_name = $_SESSION['customer_name'];
     $user_email = $_SESSION['customer_email'] ?? $customer_name;
 }
+// Get customer details and points
+$customer_query = $conn->prepare("SELECT * FROM customers WHERE id = ?");
+$customer_query->bind_param("i", $customer_id);
+$customer_query->execute();
+$customer_result = $customer_query->get_result();
+$customer = $customer_result->fetch_assoc();
+
+// Calculate loyalty tier based on points
+function calculateLoyaltyTier($points) {
+    if ($points >= 150) return 'gold';
+    if ($points >= 100) return 'platinum';
+    if ($points >= 60) return 'silver';
+    if ($points >= 30) return 'bronze';
+    return 'none';
+}
+
+// Update customer tier if needed
+if ($customer) {
+    $current_tier = calculateLoyaltyTier($customer['points']);
+    if ($customer['loyalty_tier'] !== $current_tier) {
+        $update_tier = $conn->prepare("UPDATE customers SET loyalty_tier = ? WHERE id = ?");
+        $update_tier->bind_param("si", $current_tier, $customer_id);
+        $update_tier->execute();
+        $customer['loyalty_tier'] = $current_tier;
+    }
+}
+
+// Get tier discount percentage
+function getTierDiscount($tier) {
+    switch($tier) {
+        case 'bronze': return 5;  // 5% discount
+        case 'silver': return 10; // 10% discount
+        case 'platinum': return 15; // 15% discount
+        case 'gold': return 20; // 20% discount
+        default: return 0;
+    }
+}
+
+$discount_percentage = getTierDiscount($customer['loyalty_tier'] ?? 'none');
