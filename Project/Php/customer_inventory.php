@@ -460,3 +460,31 @@ if ($result->num_rows > 0) {
                 </div>
             </div>
         </div>
+                <!-- Points Info Banner -->
+        <div class="points-banner">
+            <div class="points-system">
+                <h3><i class="fas fa-gift"></i> Loyalty Points System</h3>
+                <div class="points-rules">
+                    <div class="rule">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Every 1000 BDT spent = <strong>5 points</strong></span>
+                    </div>
+                    <div class="rule">
+                        <i class="fas fa-medal"></i>
+                        <span>Tiers: 
+                            <span class="tier-bronze">Bronze (30+ points) - 5% off</span> | 
+                            <span class="tier-silver">Silver (60+ points) - 10% off</span> | 
+                            <span class="tier-platinum">Platinum (100+ points) - 15% off</span> | 
+                            <span class="tier-gold">Gold (150+ points) - 20% off</span>
+                        </span>
+                    </div>
+                    <div class="rule">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Redeem points: <strong>1 point = 10 BDT discount</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Message Area -->
+        <div id="message" class="message"></div>
