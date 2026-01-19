@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #EBF4DD;
+    color: #3B4953;
+}
+
+/* Heading */
+.servh {
+    text-align: center;
+    font-size: 26px;
+    margin-top: 30px;
+    color: #3B4953;
+}
+
+/* Service button container */
+#ser {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.service-item {
+    text-align: center;
+}
+
+/* Service buttons */
+#regular,
+#home,
+#emergency {
+    padding: 12px 25px;
+    font-size: 15px;
+    background-color: #90AB8B;
+    color: #3B4953;
+    border: 1px solid #5A7863;
+    cursor: pointer;
+}
+
+#regular:hover,
+#home:hover,
+#emergency:hover {
+    background-color: #5A7863;
+    color: #EBF4DD;
+}
+
+/* Forms */
+#reg,
+#homeService,
+#emerg {
+    display: none;
+    width: 500px;
+    margin: 0 auto 30px auto;
+    padding: 20px;
+    background-color: #90AB8B;
+    border: 1px solid #5A7863;
+}
+
+/* Form legend */
+#reg legend,
+#homeService legend,
+#emerg legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #3B4953;
+}
+
+/* Labels */
+#reg label,
+#homeService label,
+#emerg label {
+    display: block;
+    margin-top: 12px;
+    color: #3B4953;
+}
+
+/* Inputs and selects */
+#reg input,
+#reg select,
+#homeService input,
+#homeService select,
+#emerg input,
+#emerg select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 6px;
+    border: 1px solid #5A7863;
+}
+
+/* Apply button */
+#reg button,
+#homeService button,
+#emerg button {
+    margin-top: 12px;
+    padding: 6px 14px;
+    background-color: #5A7863;
+    color: #EBF4DD;
+    border: none;
+    cursor: pointer;
+}
+
+#reg button:hover,
+#homeService button:hover,
+#emerg button:hover {
+    background-color: #3B4953;
+}
+
+/* Submit button */
+#reg input[type="submit"],
+#homeService input[type="submit"],
+#emerg input[type="submit"] {
+    margin-top: 12px;
+    padding: 8px;
+    background-color: #3B4953;
+    color: #EBF4DD;
+    border: none;
+    cursor: pointer;
+}
+
+#reg input[type="submit"]:hover,
+#homeService input[type="submit"]:hover,
+#emerg input[type="submit"]:hover {
+    background-color: #5A7863;
+}
