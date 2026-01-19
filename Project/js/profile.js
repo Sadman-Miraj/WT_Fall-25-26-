@@ -73,3 +73,53 @@ editForm.addEventListener('submit', async (e) => {
         showMessage('Error updating profile', 'error');
     }
 });
+function updateProfileDisplay(data) {
+    const profileName = document.getElementById('profileName');
+    profileName.textContent = data.name;
+    
+    const profileAvatar = document.getElementById('profileAvatar');
+    profileAvatar.textContent = data.name.charAt(0).toUpperCase();
+    
+    const profileAge = document.getElementById('profileAge');
+    profileAge.textContent = `${data.age} years`;
+    
+    const profileAddress = document.getElementById('profileAddress');
+    profileAddress.textContent = data.address;
+}
+
+function updateHeaderName(newName) {
+    const userNameElements = document.querySelectorAll('.user-name');
+    userNameElements.forEach(element => {
+        element.textContent = newName;
+    });
+    
+    const userInitialElements = document.querySelectorAll('.user-icon');
+    userInitialElements.forEach(element => {
+        element.textContent = newName.charAt(0).toUpperCase();
+    });
+}
+
+function showMessage(text, type) {
+    messageDiv.textContent = text;
+    messageDiv.className = `message ${type}`;
+    messageDiv.style.display = 'block';
+    
+    setTimeout(() => {
+        messageDiv.style.display = 'none';
+    }, 3000);
+}
+
+window.addEventListener('click', (e) => {
+    if (e.target === editModal) {
+        closeEditModal();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && editModal.style.display === 'flex') {
+        closeEditModal();
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+});
