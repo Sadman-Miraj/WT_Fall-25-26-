@@ -28,3 +28,33 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
     loadCartItems();
     updateCartSummary();
+        // Points checkbox toggle
+    const usePoints = document.getElementById('usePoints');
+    const pointsInputGroup = document.getElementById('pointsInputGroup');
+    if (usePoints) {
+        usePoints.addEventListener('change', function() {
+            if (this.checked) {
+                if (pointsInputGroup) {
+                    pointsInputGroup.style.display = 'flex';
+                    const pointsToUseInput = document.getElementById('pointsToUse');
+                    if (pointsToUseInput) {
+                        pointsToUseInput.max = window.customerData?.points || 0;
+                    }
+                }
+            } else {
+                if (pointsInputGroup) {
+                    pointsInputGroup.style.display = 'none';
+                }
+                pointsDiscount = 0;
+                pointsUsed = 0;
+                updateCartSummary();
+            }
+        });
+    }
+    
+    // Cart icon click event
+    const cartIcon = document.getElementById('cartIcon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', openCart);
+        console.log('Cart icon event listener added');
+    }
