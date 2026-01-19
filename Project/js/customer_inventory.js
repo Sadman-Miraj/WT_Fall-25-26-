@@ -502,3 +502,30 @@ function processCheckout() {
         isProcessing = false;
     });
 }
+// Show message
+function showMessage(text, type) {
+    const message = document.getElementById('message');
+    if (!message) {
+        console.log('Message would show:', text, type);
+        return;
+    }
+    
+    message.textContent = text;
+    message.className = `message ${type}`;
+    message.style.display = 'block';
+    
+    setTimeout(() => {
+        message.style.display = 'none';
+    }, 5000);
+}
+// Make functions globally available
+window.addToCart = addToCart;
+window.updateQuantity = updateQuantity;
+window.updateCartItem = updateCartItem;
+window.removeFromCart = removeFromCart;
+window.applyPoints = applyPoints;
+window.processCheckout = processCheckout;
+window.openCart = openCart;
+window.closeCart = closeCartFunc;
+
+console.log('All functions registered globally');
