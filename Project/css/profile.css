@@ -14,3 +14,25 @@ body {
     padding: 20px;
     overflow-x: hidden;
 }
+.profile-container {
+    background: #111111;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 700px;
+    padding: 40px;
+    border: 1px solid #ff8c00;
+    box-shadow: 0 10px 30px rgba(255, 140, 0, 0.2);
+}
+
+h1 {
+    color: #ff8c00;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ff8c00;
+}
+
