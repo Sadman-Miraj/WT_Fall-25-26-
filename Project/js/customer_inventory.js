@@ -102,3 +102,18 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+        // Add event listeners to quantity buttons
+    document.querySelectorAll('.qty-btn').forEach(button => {
+        const onclick = button.getAttribute('onclick');
+        if (onclick && onclick.includes('updateQuantity')) {
+            const match = onclick.match(/updateQuantity\((\d+),\s*(-?\d+)\)/);
+            if (match) {
+                const itemId = match[1];
+                const change = parseInt(match[2]);
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    updateQuantity(itemId, change);
+                });
+            }
+        }
+    });
