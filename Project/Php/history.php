@@ -151,3 +151,15 @@ $conn->close();
                 </div>
             <?php endif; ?>
         </div>
+                <!-- Purchases Section (Optional) -->
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-shopping-bag"></i> Purchase History</h2>
+            <div class="empty-state">
+                <i class="fas fa-shopping-cart"></i>
+                <p>No purchases made yet.</p>
+                <p class="subtext">Visit our shop to see available products!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
