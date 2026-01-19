@@ -86,3 +86,24 @@ $conn->close();
                 </div>
             <?php else: ?>
                 <div class="services-list">
+                                        <?php foreach ($services as $service): ?>
+                    <div class="service-card">
+                        <div class="service-header">
+                            <h3>
+                                <?php 
+                                    $service_type = $service['service_type'];
+                                    $type = isset($service['type']) ? $service['type'] : 'Service';
+                                    
+                                    if ($service_type == 'emergency') {
+                                        echo '<i class="fas fa-ambulance"></i> Emergency ' . ucfirst($type) . ' Service';
+                                    } elseif ($service_type == 'home') {
+                                        echo '<i class="fas fa-home"></i> Home ' . ucfirst($type) . ' Service';
+                                    } else {
+                                        echo '<i class="fas fa-tools"></i> ' . ucfirst($type) . ' Service';
+                                    }
+                                ?>
+                            </h3>
+                            <span class="service-type <?php echo $service_type; ?>">
+                                <?php echo ucfirst($service_type); ?>
+                            </span>
+                        </div>
