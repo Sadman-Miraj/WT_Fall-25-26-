@@ -16,3 +16,82 @@ body {
     color: #333;
     background-color: #f5f5f5;
 }
+/* ================================
+   HEADER/TOP SECTION
+   ================================ */
+
+/* Main header container */
+#top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Top left section */
+.top-left {
+    flex: 1;
+}
+
+/* Top center section */
+.top-center {
+    flex: 2;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Top right section */
+.top-right {
+    flex: 1;
+    text-align: right;
+}
+
+/* Top right links */
+.top-right a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+/* Top right links hover effect */
+.top-right a:hover {
+    color: #3498db;
+}
+/* ================================
+   LOGO LINK
+   ================================ */
+
+/* Logo link styling */
+#logo-link {
+    font-size: 28px;
+    font-weight: bold;
+    color: #3498db;
+    text-decoration: none;
+    background: white;
+    width: 50px;
+    height: 50px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+}
+
+/* Logo link hover animation */
+#logo-link:hover {
+    transform: rotate(360deg) scale(1.1);
+    background: #3498db;
+    color: white;
+}
