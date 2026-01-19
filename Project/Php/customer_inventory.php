@@ -183,3 +183,65 @@ function addToCart() {
     
     echo json_encode(['success' => true, 'cart' => $_SESSION['cart'], 'cart_count' => count($_SESSION['cart'])]);
 }
+function updateCart() {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $item_id = intval($data['item_id'] ?? 0);
+    $quantity = intval($data['quantity'] ?? 1);
+    
+    error_log("updateCart called: item_id=$item_id, quantity=$quantity");
+    
+    if ($item_id <= 0 || $quantity < 0) {
+        echo json_encode(['success' => false, 'message' => 'Invalid data']);
+        return;
+    }
+    
+    if (!isset($_SESSION['cart'])) {
+        echo json_encode(['success' => false, 'message' => 'Cart is empty']);
+        return;
+    }
+    
+    if ($quantity === 0) {
+        // Remove item
+        foreach ($_SESSION['cart'] as $key => $item) {
+            if ($item['id'] == $item_id) {
+                unset($_SESSION['cart'][$key]);
+                $_SESSION['cart'] = array_values($_SESSION['cart']);
+                break;
+            }
+        }
+    } else {
+        // Update quantity
+        foreach ($_SESSION['cart'] as &$item) {
+            if ($item['id'] == $item_id) {
+                $item['quantity'] = $quantity;
+                break;
+            }
+        }
+    }
+    
+    echo json_encode(['success' => true, 'cart' => $_SESSION['cart']]);
+}
+
+function removeFromCart() {
+    $data = json_decode(file_get_contents('php://input'), true);
+    $item_id = intval($data['item_id'] ?? 0);
+    
+    error_log("removeFromCart called: item_id=$item_id");
+    
+    if ($item_id <= 0) {
+        echo json_encode(['success' => false, 'message' => 'Invalid item ID']);
+        return;
+    }
+    
+    if (isset($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $key => $item) {
+            if ($item['id'] == $item_id) {
+                unset($_SESSION['cart'][$key]);
+                $_SESSION['cart'] = array_values($_SESSION['cart']);
+                break;
+            }
+        }
+    }
+    
+    echo json_encode(['success' => true, 'cart' => $_SESSION['cart']]);
+}
