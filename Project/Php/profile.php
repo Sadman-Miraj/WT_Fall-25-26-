@@ -164,3 +164,14 @@ $stmt->close();
         
         <!-- Message Area -->
         <div id="message" class="message"></div>
+                <!-- ================================
+             PROFILE CARD
+             ================================ -->
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar">
+                    <?php echo strtoupper(substr($user['name'], 0, 1)); ?>
+                </div>
+                <h2 id="profileName"><?php echo htmlspecialchars($user['name']); ?></h2>
+                <p class="user-email" id="profileEmail"><?php echo htmlspecialchars($user['email']); ?></p>
+            </div>
