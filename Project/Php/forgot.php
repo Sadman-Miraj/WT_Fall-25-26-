@@ -46,3 +46,58 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
         }
     }
+        elseif (isset($_POST['reset_password'])) {
+        // Step 2: Reset password
+        $email = $_SESSION['reset_email'] ?? "";
+        $session_token = $_SESSION['reset_token'] ?? "";
+        $expiry = $_SESSION['reset_expiry'] ?? 0;
+        $token = $_POST['token'] ?? "";
+        $new_password = $_POST["new_password"] ?? "";
+        $confirm_password = $_POST["confirm_password"] ?? "";
+        
+        // Validate token
+        if (empty($email) || $token !== $session_token || time() > $expiry) {
+            $message = "Session expired or invalid. Please start over.";
+            $messageType = "error";
+            $step = 1;
+            session_destroy();
+        } elseif (empty($new_password)) {
+            $message = "New password is required.";
+            $messageType = "error";
+            $step = 2;
+        } elseif (strlen($new_password) < 6) {
+            $message = "Password must be at least 6 characters.";
+            $messageType = "error";
+            $step = 2;
+        } elseif ($new_password !== $confirm_password) {
+            $message = "Passwords do not match.";
+            $messageType = "error";
+            $step = 2;
+        } else {
+            // Update password in database
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $updateSql = "UPDATE signup SET password = ? WHERE email = ?";
+            $updateStmt = $conn->prepare($updateSql);
+            $updateStmt->bind_param("ss", $hashed_password, $email);
+            
+            if ($updateStmt->execute()) {
+                // Clear reset session
+                unset($_SESSION['reset_email']);
+                unset($_SESSION['reset_token']);
+                unset($_SESSION['reset_expiry']);
+                
+                $message = "Password reset successfully! You can now login with your new password.";
+                $messageType = "success";
+                $step = 3; // Success step
+            } else {
+                $message = "Error resetting password. Please try again.";
+                $messageType = "error";
+                $step = 2;
+            }
+            
+            $updateStmt->close();
+        }
+    }
+}
+$conn->close();
+?>
