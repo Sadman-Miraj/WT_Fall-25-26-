@@ -216,4 +216,39 @@ $stmt->close();
             <a href="index.php">← Back to Home</a>
         </div>
     </div>
-    
+
+        <!-- ================================
+         EDIT PROFILE MODAL
+         ================================ -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Profile</h2>
+            <form id="editForm">
+                <div class="form-group">
+                    <label for="editName">Full Name *</label>
+                    <input type="text" id="editName" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editAge">Age *</label>
+                    <input type="number" id="editAge" name="age" min="18" max="100" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editAddress">Address *</label>
+                    <textarea id="editAddress" name="address" rows="3" required></textarea>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="submit" class="btn save-btn">Save Changes</button>
+                    <button type="button" class="btn cancel-btn" onclick="closeEditModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <?php
+// ================================
+// DATABASE CONNECTION CLOSE
+// ================================
+$conn->close();
+?>
