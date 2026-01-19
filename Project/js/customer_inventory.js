@@ -321,3 +321,32 @@ function updateCartItem(itemId, quantity) {
         showMessage('Error updating cart', 'error');
     });
 }
+// Remove from cart
+function removeFromCart(itemId) {
+    console.log('removeFromCart called:', itemId);
+    
+    if (!confirm('Remove this item from cart?')) return;
+    
+    fetch('customer_inventory.php?action=remove_from_cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({item_id: itemId})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Remove from cart response:', data);
+        if (data.success) {
+            cart = data.cart || cart;
+            updateCartCount();
+            loadCartItems();
+            updateCartSummary();
+            showMessage('Item removed from cart', 'success');
+        } else {
+            showMessage(data.message || 'Error removing item', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error removing item', 'error');
+    });
+}
