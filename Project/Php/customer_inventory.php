@@ -245,3 +245,169 @@ function removeFromCart() {
     
     echo json_encode(['success' => true, 'cart' => $_SESSION['cart']]);
 }
+function checkout() {
+    global $conn, $customer_id, $discount_percentage;
+    
+    $data = json_decode(file_get_contents('php://input'), true);
+    $use_points = $data['use_points'] ?? false;
+    $points_to_use = intval($data['points_to_use'] ?? 0);
+    
+    if (!isset($_SESSION['cart']) || empty($_SESSION['cart'])) {
+        echo json_encode(['success' => false, 'message' => 'Cart is empty']);
+        return;
+    }
+    
+    // Start transaction
+    $conn->begin_transaction();
+    
+    try {
+        // Calculate cart total
+        $cart_total = 0;
+        foreach ($_SESSION['cart'] as $item) {
+            $cart_total += $item['price'] * $item['quantity'];
+        }
+        
+        // Calculate points earned (5 points per 1000 BDT)
+        $points_earned = floor($cart_total / 1000) * 5;
+        
+        // Apply tier discount
+        $tier_discount = ($cart_total * $discount_percentage) / 100;
+        
+        // Apply points discount if requested
+        $points_discount = 0;
+        if ($use_points && $points_to_use > 0) {
+            // Check if customer has enough points
+            $points_query = $conn->prepare("SELECT points FROM customers WHERE id = ?");
+            $points_query->bind_param("i", $customer_id);
+            $points_query->execute();
+            $points_result = $points_query->get_result();
+            $customer_points = $points_result->fetch_assoc()['points'];
+            
+            if ($points_to_use <= $customer_points) {
+                // 1 point = 10 BDT discount
+                $points_discount = $points_to_use * 10;
+                
+                // Deduct points
+                $new_points = $customer_points - $points_to_use + $points_earned;
+                $update_points = $conn->prepare("UPDATE customers SET points = ? WHERE id = ?");
+                $update_points->bind_param("ii", $new_points, $customer_id);
+                $update_points->execute();
+            }
+        } else {
+            // Just add earned points
+            $points_query = $conn->prepare("SELECT points FROM customers WHERE id = ?");
+            $points_query->bind_param("i", $customer_id);
+            $points_query->execute();
+            $points_result = $points_query->get_result();
+            $customer_points = $points_result->fetch_assoc()['points'];
+            
+            $new_points = $customer_points + $points_earned;
+            $update_points = $conn->prepare("UPDATE customers SET points = ? WHERE id = ?");
+            $update_points->bind_param("ii", $new_points, $customer_id);
+            $update_points->execute();
+        }
+        
+        // Calculate final amount
+        $total_discount = $tier_discount + $points_discount;
+        $final_amount = $cart_total - $total_discount;
+        
+        if ($final_amount < 0) $final_amount = 0;
+        
+        // Create order
+        $items_json = json_encode($_SESSION['cart']);
+        $order_query = $conn->prepare("INSERT INTO orders (customer_id, items, total_amount, points_earned, discount_applied, final_amount, status) VALUES (?, ?, ?, ?, ?, ?, 'completed')");
+        $order_query->bind_param("isdidd", $customer_id, $items_json, $cart_total, $points_earned, $total_discount, $final_amount);
+        $order_query->execute();
+        $order_id = $order_query->insert_id;
+        
+        // Update inventory quantities
+        foreach ($_SESSION['cart'] as $item) {
+            $update_inv = $conn->prepare("UPDATE inventory SET quantity = quantity - ? WHERE id = ?");
+            $update_inv->bind_param("ii", $item['quantity'], $item['id']);
+            $update_inv->execute();
+        }
+        
+        // Update customer total spent
+        $update_spent = $conn->prepare("UPDATE customers SET total_spent = total_spent + ? WHERE id = ?");
+        $update_spent->bind_param("di", $final_amount, $customer_id);
+        $update_spent->execute();
+        
+        // Record points discount if used
+        if ($points_discount > 0) {
+            $discount_query = $conn->prepare("INSERT INTO discounts (customer_id, points_used, discount_amount, order_id) VALUES (?, ?, ?, ?)");
+            $discount_query->bind_param("iidi", $customer_id, $points_to_use, $points_discount, $order_id);
+            $discount_query->execute();
+        }
+        
+        // Commit transaction
+        $conn->commit();
+        
+        // Clear cart
+        $_SESSION['cart'] = [];
+        
+        echo json_encode([
+            'success' => true,
+            'message' => 'Order placed successfully!',
+            'order_id' => $order_id,
+            'points_earned' => $points_earned,
+            'new_points' => $new_points,
+            'total_discount' => $total_discount,
+            'final_amount' => $final_amount
+        ]);
+        
+    } catch (Exception $e) {
+        $conn->rollback();
+        echo json_encode(['success' => false, 'message' => 'Error processing order: ' . $e->getMessage()]);
+    }
+}
+function applyPointsDiscount() {
+    global $conn, $customer_id;
+    
+    $data = json_decode(file_get_contents('php://input'), true);
+    $points_to_use = intval($data['points'] ?? 0);
+    $cart_total = floatval($data['cart_total'] ?? 0);
+    
+    if ($points_to_use <= 0) {
+        echo json_encode(['success' => false, 'message' => 'Invalid points']);
+        return;
+    }
+    
+    // Check customer points
+    $points_query = $conn->prepare("SELECT points FROM customers WHERE id = ?");
+    $points_query->bind_param("i", $customer_id);
+    $points_query->execute();
+    $points_result = $points_query->get_result();
+    $customer_points = $points_result->fetch_assoc()['points'];
+    
+    if ($points_to_use > $customer_points) {
+        echo json_encode(['success' => false, 'message' => 'Not enough points']);
+        return;
+    }
+    
+    // Calculate discount (1 point = 10 BDT)
+    $discount = $points_to_use * 10;
+    
+    // Don't allow discount more than cart total
+    if ($discount > $cart_total) {
+        $discount = $cart_total;
+        $points_to_use = floor($discount / 10);
+    }
+    
+    echo json_encode([
+        'success' => true,
+        'points_used' => $points_to_use,
+        'discount_amount' => $discount,
+        'remaining_points' => $customer_points - $points_to_use
+    ]);
+}
+
+// Fetch inventory items
+$sql = "SELECT * FROM inventory WHERE quantity > 0 ORDER BY category, name";
+$result = $conn->query($sql);
+$items = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $items[] = $row;
+    }
+}
+?>
