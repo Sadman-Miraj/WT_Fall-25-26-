@@ -422,3 +422,41 @@ if ($result->num_rows > 0) {
 </head>
 <body>
     <div class="container">
+                <!-- Header with Cart and User Info -->
+        <div class="header">
+            <h1>Auto Parts Store</h1>
+            <div class="user-info">
+                <?php if (isset($customer['loyalty_tier'])): ?>
+                <div class="loyalty-card">
+                    <div class="tier-badge tier-<?php echo $customer['loyalty_tier']; ?>">
+                        <i class="fas fa-crown"></i>
+                        <?php echo ucfirst($customer['loyalty_tier']); ?>
+                    </div>
+                    <div class="points-info">
+                        <span class="points-label">Points:</span>
+                        <span class="points-value" id="customerPoints"><?php echo $customer['points'] ?? 0; ?></span>
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <?php if($discount_percentage > 0): ?>
+                    <div class="discount-badge">
+                        <i class="fas fa-percentage"></i>
+                        <?php echo $discount_percentage; ?>% Discount
+                    </div>
+                    <?php endif; ?>
+                </div>
+                <?php endif; ?>
+                
+                <div class="cart-section">
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </div>
+                    <div class="user-welcome">
+                        Welcome, <?php echo htmlspecialchars($customer_name); ?>
+                    </div>
+                    <a href="index.php" class="logout-btn">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                </div>
+            </div>
+        </div>
