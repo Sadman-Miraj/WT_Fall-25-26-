@@ -107,3 +107,40 @@ h1 {
     font-size: 14px;
     font-weight: 400;
 }
+.purchases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.purchase-card {
+    background: #1a1a1a;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #333;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.purchase-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #ff8c00;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.purchase-card:hover {
+    border-color: #ff8c00;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(255, 140, 0, 0.1);
+}
+
+.purchase-card:hover::before {
+    opacity: 1;
+}
