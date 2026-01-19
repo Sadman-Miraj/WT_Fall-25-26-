@@ -604,3 +604,26 @@ if ($result->num_rows > 0) {
             </button>
         </div>
     </div>
+        <!-- Cart Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    
+    <!-- Pass data to JavaScript -->
+    <script>
+        window.customerData = {
+            id: <?php echo $customer_id; ?>,
+            points: <?php echo $customer['points'] ?? 0; ?>,
+            tier: '<?php echo $customer['loyalty_tier'] ?? 'none'; ?>',
+            discountPercentage: <?php echo $discount_percentage; ?>
+        };
+        
+        window.products = <?php echo json_encode($items); ?>;
+        
+        // Initialize cart from session
+        window.cart = <?php echo json_encode($_SESSION['cart'] ?? []); ?>;
+        
+        // Debug info
+        console.log('PHP Data Loaded:');
+        console.log('Customer:', window.customerData);
+        console.log('Products:', window.products);
+        console.log('Cart:', window.cart);
+    </script>
