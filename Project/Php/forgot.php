@@ -7,6 +7,7 @@ $step = 1; // 1 = email verification, 2 = password reset
 $message = "";
 $messageType = "";
 $token = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['verify_email'])) {
         // Step 1: Verify email
@@ -45,8 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             $stmt->close();
         }
-    }
-        elseif (isset($_POST['reset_password'])) {
+        
+    } elseif (isset($_POST['reset_password'])) {
         // Step 2: Reset password
         $email = $_SESSION['reset_email'] ?? "";
         $session_token = $_SESSION['reset_token'] ?? "";
@@ -101,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 $conn->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +111,7 @@ $conn->close();
     <title>Forgot Password</title>
     <link rel="stylesheet" href="../css/login.css">
     <style>
-                .forgot-container {
+        .forgot-container {
             max-width: 500px;
         }
         
@@ -208,7 +210,7 @@ $conn->close();
     </style>
 </head>
 <body>
-        <div class="login-container forgot-container">
+    <div class="login-container forgot-container">
         <h2>Reset Password</h2>
         
         <!-- Step Indicator -->
@@ -232,7 +234,8 @@ $conn->close();
                 <?php echo htmlspecialchars($message); ?>
             </div>
         <?php endif; ?>
-                <?php if ($step == 1): ?>
+        
+        <?php if ($step == 1): ?>
             <!-- Step 1: Email Verification -->
             <form method="post" action="" id="verifyForm">
                 <p class="instructions">Enter your email address to verify your account.</p>
@@ -249,7 +252,8 @@ $conn->close();
                     <a href="login.php" class="link">← Back to Login</a>
                 </div>
             </form>
-                    <?php elseif ($step == 2): ?>
+            
+        <?php elseif ($step == 2): ?>
             <!-- Step 2: Password Reset -->
             <form method="post" action="" id="resetForm">
                 <p class="instructions">Create a new password for your account.</p>
@@ -274,7 +278,8 @@ $conn->close();
                     ← Use different email
                 </button>
             </form>
-                    <?php elseif ($step == 3): ?>
+            
+        <?php elseif ($step == 3): ?>
             <!-- Step 3: Success -->
             <div class="success-message">
                 <div class="success-icon">✓</div>
@@ -290,7 +295,8 @@ $conn->close();
             </div>
         <?php endif; ?>
     </div>
-        <script>
+    
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             <?php if ($step == 1): ?>
                 const verifyForm = document.getElementById('verifyForm');
@@ -315,7 +321,8 @@ $conn->close();
                         return false;
                     }
                 });
-                            <?php elseif ($step == 2): ?>
+                
+            <?php elseif ($step == 2): ?>
                 const resetForm = document.getElementById('resetForm');
                 const newPasswordInput = document.getElementById('new_password');
                 const confirmPasswordInput = document.getElementById('confirm_password');
