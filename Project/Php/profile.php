@@ -156,3 +156,11 @@ $stmt->close();
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
+        <!-- ================================
+         MAIN PROFILE CONTAINER
+         ================================ -->
+    <div class="profile-container">
+        <h1>My Profile</h1>
+        
+        <!-- Message Area -->
+        <div id="message" class="message"></div>
