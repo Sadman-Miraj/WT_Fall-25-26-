@@ -107,3 +107,29 @@ $conn->close();
                                 <?php echo ucfirst($service_type); ?>
                             </span>
                         </div>
+                                                <div class="service-details">
+                            <!-- Show all available data -->
+                            <?php foreach ($service as $key => $value): ?>
+                                <?php if (!in_array($key, ['service_type', 'service_date']) && !empty($value)): ?>
+                                    <div class="detail-row">
+                                        <span class="detail-label"><?php echo ucfirst(str_replace('_', ' ', $key)); ?>:</span>
+                                        <span class="detail-value"><?php echo htmlspecialchars($value); ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                            
+                            <div class="detail-row">
+                                <span class="detail-label">Service Date:</span>
+                                <span class="detail-value">
+                                    <?php 
+                                        if (isset($service['date'])) {
+                                            echo htmlspecialchars($service['date']);
+                                        } elseif (isset($service['service_date'])) {
+                                            echo htmlspecialchars($service['service_date']);
+                                        } else {
+                                            echo 'Recently';
+                                        }
+                                    ?>
+                                </span>
+                            </div>
+                        </div>
