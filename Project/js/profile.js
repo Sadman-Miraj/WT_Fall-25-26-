@@ -51,3 +51,25 @@ editForm.addEventListener('submit', async (e) => {
         showMessage('Address is required', 'error');
         return;
     }
+        try {
+        const response = await fetch('profile.php?action=update_profile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            updateProfileDisplay(formData);
+            closeEditModal();
+            showMessage('Profile updated successfully!', 'success');
+            updateHeaderName(formData.name);
+        } else {
+            showMessage(result.message || 'Error updating profile', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+        showMessage('Error updating profile', 'error');
+    }
+});
