@@ -37,3 +37,42 @@ h1 {
 }
 
 
+
+.profile-details {
+    margin: 30px 0;
+    background: #222222;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #333;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    color: #ffa500;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    color: #ffd700;
+    font-weight: 500;
+    text-align: right;
+    max-width: 300px;
+    word-break: break-word;
+    font-size: 16px;
+}
