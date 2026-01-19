@@ -274,3 +274,19 @@ $conn->close();
                     ← Use different email
                 </button>
             </form>
+                    <?php elseif ($step == 3): ?>
+            <!-- Step 3: Success -->
+            <div class="success-message">
+                <div class="success-icon">✓</div>
+                <h3>Password Reset Successful!</h3>
+                <p>Your password has been updated successfully.</p>
+                <p>You can now login with your new password.</p>
+                
+                <div style="margin-top: 30px;">
+                    <a href="login.php" class="login-btn" style="display: inline-block; width: auto; padding: 10px 30px;">
+                        Go to Login
+                    </a>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
