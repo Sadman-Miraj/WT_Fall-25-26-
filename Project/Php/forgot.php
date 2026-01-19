@@ -249,3 +249,28 @@ $conn->close();
                     <a href="login.php" class="link">← Back to Login</a>
                 </div>
             </form>
+                    <?php elseif ($step == 2): ?>
+            <!-- Step 2: Password Reset -->
+            <form method="post" action="" id="resetForm">
+                <p class="instructions">Create a new password for your account.</p>
+                
+                <div class="form-group">
+                    <label for="new_password">New Password:</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                    <div class="password-hint">Must be at least 6 characters long</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirm_password">Confirm New Password:</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                
+                <input type="hidden" name="token" value="<?php echo htmlspecialchars($_SESSION['reset_token'] ?? ''); ?>">
+                <input type="hidden" name="reset_password" value="1">
+                
+                <button type="submit" class="login-btn">Reset Password</button>
+                
+                <button type="button" class="back-btn" onclick="window.location.href='forgot.php'">
+                    ← Use different email
+                </button>
+            </form>
