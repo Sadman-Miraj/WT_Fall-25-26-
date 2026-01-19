@@ -117,3 +117,23 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
+        // Apply points button
+    const applyPointsBtn = document.querySelector('.apply-points-btn');
+    if (applyPointsBtn) {
+        applyPointsBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            applyPoints();
+        });
+    }
+    
+    // Checkout button
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            processCheckout();
+        });
+    }
+    
+    console.log('All event listeners added');
+});
