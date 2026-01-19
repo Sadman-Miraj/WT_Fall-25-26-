@@ -133,3 +133,21 @@ $conn->close();
                                 </span>
                             </div>
                         </div>
+                                                <!-- Service date badge -->
+                        <div class="service-date-badge">
+                            <i class="fas fa-calendar-alt"></i>
+                            <?php 
+                                if (isset($service['date'])) {
+                                    echo date('M d, Y', strtotime($service['date']));
+                                } elseif (isset($service['service_date'])) {
+                                    echo date('M d, Y', strtotime($service['service_date']));
+                                } else {
+                                    echo 'Recent';
+                                }
+                            ?>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        </div>
