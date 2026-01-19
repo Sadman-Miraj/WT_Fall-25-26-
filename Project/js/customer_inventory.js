@@ -137,3 +137,31 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('All event listeners added');
 });
+// Cart Toggle functions
+function openCart() {
+    console.log('Opening cart');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    
+    if (cartSidebar) {
+        cartSidebar.style.right = '0';
+    }
+    if (cartOverlay) {
+        cartOverlay.style.display = 'block';
+    }
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCartFunc() {
+    console.log('Closing cart');
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+    
+    if (cartSidebar) {
+        cartSidebar.style.right = '-400px';
+    }
+    if (cartOverlay) {
+        cartOverlay.style.display = 'none';
+    }
+    document.body.style.overflow = 'auto';
+}
