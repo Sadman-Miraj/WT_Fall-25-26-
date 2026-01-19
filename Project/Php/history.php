@@ -57,3 +57,19 @@ if ($stmt_regular) {
 
 $conn->close();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My History - Automobiles Solution</title>
+    <link rel="stylesheet" href="../css/history.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="history-container">
+        <h1>My Service History</h1>
+        
+        <div class="back-link">
+            <a href="profile.php"><i class="fas fa-arrow-left"></i> Back to Profile</a>
+        </div>
