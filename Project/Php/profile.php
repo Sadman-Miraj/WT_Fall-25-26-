@@ -199,3 +199,21 @@ $stmt->close();
                     </span>
                 </div>
             </div>
+                        <!-- ================================
+                 PROFILE ACTIONS SECTION
+                 ================================ -->
+            <div class="profile-actions">
+                <button class="btn btn-primary" onclick="openEditModal()">Edit Profile</button>
+                <a href="history.php" class="btn btn-history">My History</a>
+                <a href="forgot.php" class="btn btn-secondary">Change Password</a>
+                <a href="logout.php" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+                <!-- ================================
+             BACK LINK
+             ================================ -->
+        <div class="back-link">
+            <a href="index.php">← Back to Home</a>
+        </div>
+    </div>
+    
