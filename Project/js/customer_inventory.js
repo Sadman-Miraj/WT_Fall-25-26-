@@ -165,3 +165,159 @@ function closeCartFunc() {
     }
     document.body.style.overflow = 'auto';
 }
+// Add to Cart
+function addToCart(itemId) {
+    console.log('addToCart called with itemId:', itemId);
+    
+    if (isProcessing) {
+        console.log('Already processing, please wait');
+        return;
+    }
+    
+    const qtyInput = document.getElementById('qty-' + itemId);
+    if (!qtyInput) {
+        console.error('Quantity input not found for item:', itemId);
+        showMessage('Error adding to cart', 'error');
+        return;
+    }
+    
+    const quantity = parseInt(qtyInput.value) || 1;
+    console.log('Quantity:', quantity);
+    
+    if (quantity <= 0) {
+        showMessage('Invalid quantity', 'error');
+        return;
+    }
+    
+    isProcessing = true;
+    showMessage('Adding to cart...', 'info');
+    
+    fetch('customer_inventory.php?action=add_to_cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({item_id: itemId, quantity: quantity})
+    })
+    .then(response => {
+        console.log('Response received');
+        return response.json();
+    })
+    .then(data => {
+        console.log('Add to cart response:', data);
+        if (data.success) {
+            cart = data.cart || cart;
+            updateCartCount();
+            loadCartItems();
+            updateCartSummary();
+            showMessage('Item added to cart!', 'success');
+            qtyInput.value = 1; // Reset quantity input
+        } else {
+            showMessage(data.message || 'Error adding to cart', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Fetch Error:', error);
+        showMessage('Network error. Please check your connection.', 'error');
+    })
+    .finally(() => {
+        isProcessing = false;
+    });
+}
+// Update quantity in product card
+function updateQuantity(itemId, change) {
+    const qtyInput = document.getElementById('qty-' + itemId);
+    if (!qtyInput) {
+        console.error('Quantity input not found for item:', itemId);
+        return;
+    }
+    
+    let currentQty = parseInt(qtyInput.value) || 1;
+    currentQty += change;
+    
+    // Find product max quantity
+    const product = window.products?.find(p => p.id == itemId);
+    if (product) {
+        if (currentQty < 1) currentQty = 1;
+        if (currentQty > product.quantity) currentQty = product.quantity;
+        qtyInput.value = currentQty;
+    }
+}
+// Load cart items
+function loadCartItems() {
+    const cartItems = document.getElementById('cartItems');
+    if (!cartItems) {
+        console.error('cartItems element not found');
+        return;
+    }
+    
+    if (!cart || cart.length === 0) {
+        cartItems.innerHTML = `
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let html = '';
+    cart.forEach(item => {
+        const total = (item.price * item.quantity).toFixed(2);
+        html += `
+            <div class="cart-item" data-id="${item.id}">
+                <div class="cart-item-image">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">৳${parseFloat(item.price).toFixed(2)} × ${item.quantity}</div>
+                    <div class="cart-item-total">৳${total}</div>
+                </div>
+                <div class="cart-item-actions">
+                    <input type="number" 
+                           class="cart-item-qty" 
+                           value="${item.quantity}" 
+                           min="1"
+                           onchange="updateCartItem(${item.id}, this.value)">
+                    <button class="remove-item" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    cartItems.innerHTML = html;
+}
+// Update cart item quantity
+function updateCartItem(itemId, quantity) {
+    quantity = parseInt(quantity);
+    console.log('updateCartItem called:', itemId, quantity);
+    
+    if (isNaN(quantity) || quantity < 0) {
+        showMessage('Invalid quantity', 'error');
+        loadCartItems(); // Reload to reset incorrect quantity
+        return;
+    }
+    
+    fetch('customer_inventory.php?action=update_cart', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({item_id: itemId, quantity: quantity})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Update cart response:', data);
+        if (data.success) {
+            cart = data.cart || cart;
+            loadCartItems();
+            updateCartSummary();
+            showMessage('Cart updated', 'success');
+        } else {
+            showMessage(data.message || 'Error updating cart', 'error');
+            loadCartItems(); // Reload to reset incorrect quantity
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showMessage('Error updating cart', 'error');
+    });
+}
