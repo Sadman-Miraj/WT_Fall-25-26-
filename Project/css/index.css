@@ -1,0 +1,18 @@
+/* ================================
+   RESET AND BASE STYLES
+   ================================ */
+
+/* Reset all margins, padding, and set box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body base styles */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
