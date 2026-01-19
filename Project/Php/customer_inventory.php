@@ -496,3 +496,57 @@ if ($result->num_rows > 0) {
             <button class="filter-btn" data-category="shock">Shock Absorbers</button>
             <button class="filter-btn" data-category="battery">Batteries</button>
         </div>
+                <!-- Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <?php if (empty($items)): ?>
+                <div class="no-products">
+                    <i class="fas fa-box-open"></i>
+                    <p>No products available at the moment.</p>
+                </div>
+            <?php else: ?>
+                <?php foreach ($items as $item): ?>
+                <div class="product-card" data-category="<?php echo $item['category']; ?>">
+                    <div class="product-image">
+                        <!-- Placeholder for product image -->
+                        <div class="image-placeholder">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <?php if($item['quantity'] <= 5): ?>
+                        <span class="low-stock-badge">Low Stock</span>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="product-info">
+                        <h3 class="product-name"><?php echo htmlspecialchars($item['name']); ?></h3>
+                        <span class="product-category"><?php echo ucfirst($item['category']); ?></span>
+                        
+                        <div class="product-price">
+                            <span class="price">৳<?php echo number_format($item['price'], 2); ?></span>
+                            <?php if($item['quantity'] <= 5): ?>
+                            <span class="stock-warning">Only <?php echo $item['quantity']; ?> left!</span>
+                            <?php endif; ?>
+                        </div>
+                        
+                        <p class="product-description"><?php echo htmlspecialchars($item['description'] ?? 'No description available'); ?></p>
+                        
+                        <div class="quantity-control">
+                            <div class="qty-selector">
+                                <button class="qty-btn minus" onclick="updateQuantity(<?php echo $item['id']; ?>, -1)">-</button>
+                                <input type="number" 
+                                       class="qty-input" 
+                                       id="qty-<?php echo $item['id']; ?>" 
+                                       value="1" 
+                                       min="1" 
+                                       max="<?php echo $item['quantity']; ?>">
+                                <button class="qty-btn plus" onclick="updateQuantity(<?php echo $item['id']; ?>, 1)">+</button>
+                            </div>
+                            <button class="add-to-cart-btn" onclick="addToCart(<?php echo $item['id']; ?>)">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+    </div>
