@@ -73,3 +73,16 @@ $conn->close();
         <div class="back-link">
             <a href="profile.php"><i class="fas fa-arrow-left"></i> Back to Profile</a>
         </div>
+
+                <!-- Services Section -->
+        <div class="section">
+            <h2 class="section-title">Services History</h2>
+            
+            <?php if (empty($services)): ?>
+                <div class="empty-state">
+                    <i class="fas fa-history"></i>
+                    <p>No services booked yet.</p>
+                    <p class="subtext">Book your first service today!</p>
+                </div>
+            <?php else: ?>
+                <div class="services-list">
