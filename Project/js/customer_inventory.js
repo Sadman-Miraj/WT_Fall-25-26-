@@ -350,3 +350,34 @@ function removeFromCart(itemId) {
         showMessage('Error removing item', 'error');
     });
 }
+// Update cart count
+function updateCartCount() {
+    const cartCount = document.getElementById('cartCount');
+    if (!cartCount) {
+        console.error('cartCount element not found');
+        return;
+    }
+    
+    const count = cart.reduce((total, item) => total + (item.quantity || 0), 0);
+    cartCount.textContent = count;
+    console.log('Cart count updated:', count);
+}
+// Update cart summary
+function updateCartSummary() {
+    const subtotal = cart.reduce((total, item) => total + (item.price * (item.quantity || 0)), 0);
+    const tierDiscount = (subtotal * (window.customerData?.discountPercentage || 0)) / 100;
+    const total = Math.max(0, subtotal - tierDiscount - pointsDiscount);
+    
+    // Update display elements
+    const subtotalEl = document.getElementById('cartSubtotal');
+    const tierDiscountEl = document.getElementById('tierDiscount');
+    const pointsDiscountEl = document.getElementById('pointsDiscount');
+    const totalEl = document.getElementById('cartTotal');
+    
+    if (subtotalEl) subtotalEl.textContent = `৳${subtotal.toFixed(2)}`;
+    if (tierDiscountEl) tierDiscountEl.textContent = `-৳${tierDiscount.toFixed(2)}`;
+    if (pointsDiscountEl) pointsDiscountEl.textContent = `-৳${pointsDiscount.toFixed(2)}`;
+    if (totalEl) totalEl.textContent = `৳${total.toFixed(2)}`;
+    
+    console.log('Cart summary updated:', { subtotal, tierDiscount, pointsDiscount, total });
+}
