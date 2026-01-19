@@ -73,3 +73,63 @@ function getProfile() {
     }
     $stmt->close();
 }
+
+// ================================
+// UPDATE PROFILE FUNCTION
+// ================================
+
+// Function to update profile data via AJAX
+function updateProfile() {
+    global $conn;
+    
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'message' => 'Not logged in']);
+        return;
+    }
+    
+    // Get raw POST data
+    $data = json_decode(file_get_contents('php://input'), true);
+    
+    // Check if data was received
+    if (!$data) {
+        echo json_encode(['success' => false, 'message' => 'No data received']);
+        return;
+    }
+    
+    $user_id = $_SESSION['user_id'];
+    $name = trim($data['name'] ?? '');
+    $age = intval($data['age'] ?? 0);
+    $address = trim($data['address'] ?? '');
+    
+    // Validation
+    if (empty($name)) {
+        echo json_encode(['success' => false, 'message' => 'Name is required']);
+        return;
+    }
+    
+    if ($age < 18 || $age > 100) {
+        echo json_encode(['success' => false, 'message' => 'Age must be between 18 and 100']);
+        return;
+    }
+    
+    if (empty($address)) {
+        echo json_encode(['success' => false, 'message' => 'Address is required']);
+        return;
+    }
+    
+    // Update profile
+    $sql = "UPDATE signup SET name = ?, age = ?, address = ? WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sisi", $name, $age, $address, $user_id);
+    
+    if ($stmt->execute()) {
+        // Update session
+        $_SESSION['user_name'] = $name;
+        
+        echo json_encode(['success' => true, 'message' => 'Profile updated successfully']);
+    } else {
+        error_log("Database error: " . $stmt->error);
+        echo json_encode(['success' => false, 'message' => 'Error updating profile: ' . $stmt->error]);
+    }
+    $stmt->close();
+}
