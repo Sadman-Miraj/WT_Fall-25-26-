@@ -208,3 +208,50 @@ body {
     color: white !important;
     background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
 }
+/* ================================
+   CENTER SECTION
+   ================================ */
+
+/* Main content center section */
+#center {
+    margin-top: 100px;
+    padding: 40px 5%;
+    text-align: center;
+    background: white;
+    border-radius: 15px;
+    margin-left: 5%;
+    margin-right: 5%;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+/* Welcome heading */
+.welcome {
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Welcome message for logged in users */
+.welcome-message {
+    font-size: 20px;
+    color: #27ae60;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(39, 174, 96, 0.1) 0%, rgba(46, 204, 113, 0.1) 100%);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Information paragraph text */
+.info {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
